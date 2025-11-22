@@ -1,0 +1,7 @@
+# Archivos de compilacion: 
+*.exe
+*.o
+*.win
+*.layout
+*.depend
+*.tmp
