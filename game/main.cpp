@@ -1,16 +1,10 @@
-/*
- * Remoria - Visual Novel Engine
- * Main Entry Point
- * 
- * Resolución nativa: 1920x1080
- * Resolución de sprites: 320x180 (escalado x6)
- */
-
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <direct.h>
 #include "src/core/ResourceManager.h"
-#include "src/graphics/SpriteAnimator.h"  // ← NUEVO
+#include "src/graphics/SpriteAnimator.h"
+#include "src/ui/DialogueBox.h"
+#include "src/visualnovel/SceneManager.h"  // ← NUEVO
 
 using namespace std;
 using namespace sf;
@@ -60,57 +54,62 @@ int main() {
     
     cout << "[OK] Configuracion cargada" << endl;
     
-    // === PRUEBA DE SPRITEANIMATOR ===
-    SpriteAnimator testCharacter;
-    bool characterLoaded = false;
+    // === INICIALIZAR DIALOGUEBOX ===
+    DialogueBox dialogueBox;
+    Font dialogueFont;
     
-    // Intenta cargar sprites de prueba (coloca tus 2 frames PNG aquí)
-    if (testCharacter.loadFrames(
-        "assets/images/characters/protagonist/test_01.png",
-        "assets/images/characters/protagonist/test_02.png"
-    )) {
-        testCharacter.setScale(SCALE_FACTOR, SCALE_FACTOR);
-        
-        // Centrar horizontalmente, posicionar verticalmente
-        float posX = (NATIVE_WIDTH - CHARACTER_SPRITE_W * SCALE_FACTOR) / 2.0f;
-        float posY = 200.0f;  // Arriba del área de diálogo
-        
-        testCharacter.setPosition(posX, posY);
-        testCharacter.setFrameTime(0.5f);  // Alterna cada 0.5 segundos
-        testCharacter.play();
-        
-        characterLoaded = true;
-        cout << "[OK] Sprite de prueba cargado y posicionado" << endl;
-    } else {
-        cout << "[INFO] No se encontraron sprites de prueba" << endl;
-        cout << "[INFO] Coloca 'test_01.png' y 'test_02.png' en:" << endl;
-        cout << "       assets/images/characters/protagonist/" << endl;
+    // Cargar fuente
+    if (!dialogueFont.loadFromFile("assets/fonts/arial.ttf")) {
+        cerr << "[ERROR] No se pudo cargar fuente para DialogueBox" << endl;
+        return -1;
+    }
+    dialogueBox.setFont(&dialogueFont);
+    
+    // Configurar DialogueBox
+    dialogueBox.setPosition(60, 750);
+    dialogueBox.setSize(1800, 300);
+    
+    // Cargar sprite de DialogueBox (OBLIGATORIO)
+    if (!dialogueBox.loadBoxSprite("assets/images/ui/dialogue_box.png")) {
+        cerr << "[ERROR FATAL] No se pudo cargar dialogue_box.png" << endl;
+        cerr << "[ERROR] Crea el sprite (300x50px) en: assets/images/ui/" << endl;
+        return -1;
     }
     
-    // Texto temporal para prueba
-    Font testFont;
-    Text testText;
+    cout << "[OK] DialogueBox inicializado" << endl;
+    
+    // === INICIALIZAR SCENEMANAGER ===
+    SceneManager sceneManager;
+    sceneManager.setDialogueBox(&dialogueBox);
+    sceneManager.setTextSpeed(50);
+    
+    // Cargar escena inicial
+    if (!sceneManager.loadSceneById("prologue")) {
+        cerr << "[ERROR FATAL] No se pudo cargar escena inicial" << endl;
+        cerr << "[ERROR] Crea 'prologue.json' en: data/storydata/scenes/" << endl;
+        return -1;
+    }
+    
+    cout << "[OK] SceneManager inicializado" << endl;
+    
+	Font instructionFont;
     Text instructionsText;
     
-    if (testFont.loadFromFile("assets/fonts/arial.ttf")) {
-        testText.setFont(testFont);
-        testText.setString("Remoria - SpriteAnimator Test");
-        testText.setCharacterSize(32);
-        testText.setFillColor(Color(76, 106, 51)); // Verde de paleta
-        testText.setPosition(50, 50);
-        
-        instructionsText.setFont(testFont);
+    if (instructionFont.loadFromFile("assets/fonts/arial.ttf")) {
+        instructionsText.setFont(instructionFont);
         instructionsText.setString(
-            "ESC: Salir\n"
-            "SPACE: Pausar/Reanudar animacion\n"
-            "R: Reiniciar animacion"
+            "Remoria - Visual Novel Engine\n\n"
+            "ENTER/SPACE: Avanzar dialogo\n"
+            "S: Saltar texto\n"
+            "1-9: Seleccionar opcion (cuando aparezcan)\n"
+            "ESC: Salir"
         );
         instructionsText.setCharacterSize(20);
         instructionsText.setFillColor(Color(76, 106, 51));
-        instructionsText.setPosition(50, 100);
+        instructionsText.setPosition(50, 50);
     }
     
-    // Fondo con color de paleta PaperPixels
+	// Fondo con color de paleta PaperPixels
     Color bgColor(243, 230, 211); // Beige claro (#F3E6D3)
     
     // Ejemplo de sprite escalado (cuando tengas uno)
@@ -135,48 +134,32 @@ int main() {
                 running = false;
             }
             
-            // ESC para salir
+            // Controles de teclado
             if (event.type == Event::KeyPressed) {
+                // ESC para salir
                 if (event.key.code == Keyboard::Escape) {
                     running = false;
                 }
-                
-                // SPACE para pausar/reanudar
-                if (event.key.code == Keyboard::Space && characterLoaded) {
-                    if (testCharacter.isPlaying()) {
-                        testCharacter.pause();
-                        cout << "[DEBUG] Animacion pausada" << endl;
-                    } else {
-                        testCharacter.play();
-                        cout << "[DEBUG] Animacion reanudada" << endl;
-                    }
-                }
-                
-                // R para reiniciar
-                if (event.key.code == Keyboard::R && characterLoaded) {
-                    testCharacter.reset();
-                    testCharacter.play();
-                    cout << "[DEBUG] Animacion reiniciada" << endl;
-                }
             }
+            
+            // Pasar eventos al SceneManager
+            sceneManager.handleInput(event);
         }
         
-        // Actualizar animaciones
-        if (characterLoaded) {
-            testCharacter.update(deltaTime);
-        }
+        // Actualizar SceneManager (actualiza escena + DialogueBox)
+        sceneManager.update(deltaTime);
         
         // Renderizado
         window.clear(bgColor);
         
-        // Dibujar sprite animado
-        if (characterLoaded) {
-            window.draw(testCharacter);
-        }
+        // Dibujar escena (background + personajes)
+        window.draw(sceneManager);
         
-        // Dibujar UI
-        if (testFont.getInfo().family != "") {
-            window.draw(testText);
+        // Dibujar DialogueBox
+        window.draw(dialogueBox);
+        
+        // Dibujar instrucciones
+        if (instructionFont.getInfo().family != "") {
             window.draw(instructionsText);
         }
         
