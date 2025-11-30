@@ -1,0 +1,46 @@
+{
+  "id": "prologue",
+  "background": "park_day.png",
+  "music": "nostalgia_theme.ogg",
+  
+  "characters": [
+    {
+      "id": "protagonist",
+      "sprites": ["test_01.png", "test_02.png"],
+      "position": [820, 200],
+      "scale": 6,
+      "flip": false
+    }
+  ],
+  
+  "dialogues": [
+    {
+      "character": "Protagonista",
+      "text": "Este parque... lo recuerdo perfectamente.",
+      "expression": "neutral"
+    },
+    {
+      "character": "Protagonista",
+      "text": "Solia venir aqui todos los dias despues de la escuela."
+    },
+    {
+      "character": "Protagonista",
+      "text": "Ese columpio... siempre estaba ocupado."
+    },
+    {
+      "character": "Protagonista",
+      "text": "Pero hoy esta vacio. Todo esta vacio..."
+    }
+  ],
+  
+  "choices": [
+    {
+      "text": "Acercarme al columpio",
+      "next_scene": "park_swing"
+    },
+    {
+      "text": "Caminar hacia el arbol",
+      "next_scene": "park_tree"
+    }
+  ]
+}
