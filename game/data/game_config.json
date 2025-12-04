@@ -1,0 +1,42 @@
+{
+    "window": {
+        "width": 1920,
+        "height": 1080,
+        "title": "Remoria~",
+        "icon": "assets/images/icon.png"
+    },
+    "audio": {
+        "master_volume": 100
+    },
+    "visual": {
+        "scale_factor": 6,
+        "animate_fps": 6
+    },
+    "palette": {
+      "name": "PaperPixels",
+      "colors": {
+        "beige_light": "#F3E6D3",
+        "sand_soft": "#EAD7B7",
+        "orange_pastel": "#E8A87C",
+        "terracotta_soft": "#D98E6F",
+        "brown_light": "#C68B6B",
+        "gray_warm": "#B4A89A",
+        "gray_medium": "#A89F94",
+        "gray_cold": "#8F8F8F",
+        "blue_gray": "#7C8A9E",
+        "blue_steel": "#6C7A8C",
+        "red_muted": "#B45A5A",
+        "red_brick": "#A14C4C",
+        "purple_soft": "#9B6BAE",
+        "lavender_gray": "#8C7BAA",
+        "yellow_pastel": "#F2D16B",
+        "yellow_mustard": "#E6C45A",
+        "green_mint": "#A4C686",
+        "green_olive": "#94B46F",
+        "green_moss": "#7FA15A",
+        "green_forest": "#6D8C4C",
+        "green_dark_gray": "#5C7A3F",
+        "green_deep": "#4C6A33"
+      }
+  }
+}
