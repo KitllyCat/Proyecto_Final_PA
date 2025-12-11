@@ -1,79 +1,119 @@
-/*
- * Remoria - Visual Novel Engine
- * Main Entry Point
- *
- * Resolución nativa: 1920x1080
- * Resolución de sprites: 320x180 (escalado x6)
- */
-
+// main.cpp - Remoria (actualizado para no salir con return 1)
+// Requisitos: SFML 2.5.1 y nlohmann::json (json.hpp) en include path
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include <fstream>
-#include "src/core/ResourceManager.h"
+#include <string>
+#include <SFML/Graphics.hpp>
 #include "json.hpp"
+#include "src/core/ResourceManager.h"
+#include "src/visualnovel/SceneManager.h"
 
 using namespace std;
 using namespace sf;
 using json = nlohmann::json;
 
 int main() {
-
-    // -----------------------------
-    //  Cargar config del juego
-    // -----------------------------
+    // -------------------------
+    //  Leer configuración
+    // -------------------------
     json config;
-
-    ifstream file("data/game_config.json");
-    if (!file.is_open()) {
-        cout << "ERROR: No se pudo abrir game_config.json\n";
-        return 1;
+    const string configPath = "data/game_config.json";
+    ifstream cfgFile(configPath);
+    if (!cfgFile.is_open()) {
+        cout << "Notice: No se pudo abrir " << configPath << ". Usando valores por defecto.\n";
+        // defaults
+        config["window"]["width"]  = 1920;
+        config["window"]["height"] = 1080;
+        config["window"]["title"]  = "Remoria";
+        config["start_scene"] = "data/scenes/prologue.json";
+    } else {
+        try {
+            cfgFile >> config;
+        } catch (exception& e) {
+            cout << "Warning: error parseando " << configPath << " : " << e.what() 
+                 << ". Se usarán valores por defecto.\n";
+            config["window"]["width"]  = 1920;
+            config["window"]["height"] = 1080;
+            config["window"]["title"]  = "Remoria";
+            config["start_scene"] = "data/scenes/prologue.json";
+        }
+        cfgFile.close();
     }
 
-    file >> config;
-    file.close();
+    // Extraer valores (con fallback)
+    int WIDTH  = config.value("window", json::object()).value("width", 1920);
+    int HEIGHT = config.value("window", json::object()).value("height", 1080);
+    string TITLE = config.value("window", json::object()).value("title", string("Remoria"));
+    string ICON_PATH = config.value("window", json::object()).value("icon", string("assets/images/icon.png"));
+    string startScene = config.value("start_scene", string("data/scenes/prologue.json"));
 
-    int WIDTH  = config["window"]["width"];
-    int HEIGHT = config["window"]["height"];
-    string TITLE = config["window"]["title"];
-    string ICON_PATH = config["window"]["icon"];
-
-    // -----------------------------
+    // -------------------------
     //  Crear ventana
-    // -----------------------------
-    RenderWindow window(VideoMode(WIDTH, HEIGHT), TITLE);
+    // -------------------------
+    RenderWindow window(VideoMode((unsigned)WIDTH, (unsigned)HEIGHT), TITLE, Style::Close);
     window.setFramerateLimit(60);
 
-    // Cargar icono
+    // Intentar cargar icono (silencioso si falla)
     Image icon;
     if (icon.loadFromFile(ICON_PATH)) {
         window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    } else {
+        cout << "Notice: icon no encontrado en: " << ICON_PATH << "\n";
     }
 
-    // ResourceManager global
-    ResourceManager rm;
+    // -------------------------
+    //  ResourceManager y SceneManager
+    // -------------------------
+    ResourceManager resources;
 
-    // Cargar fuente de ejemplo
-    Font& font = rm.getFont("assets/fonts/default.ttf");
+    // Carga de fuente por defecto (si existe) - no es fatal si falla
+    const string defaultFontPath = "assets/fonts/default.ttf";
+    try {
+        resources.getFont(defaultFontPath);
+    } catch (...) {
+        cout << "Notice: fuente por defecto no encontrada en " << defaultFontPath << " (no es fatal)\n";
+    }
 
-    Text text("Bienvenido a REMORIA", font, 42);
-    text.setPosition(50, 50);
-    text.setFillColor(Color::White);
+    SceneManager sceneManager(resources);
 
-    // -----------------------------
-    //  Bucle principal del juego
-    // -----------------------------
+    // Asegurar path completo de escena inicial
+    string startPath = startScene;
+    if (startScene.find("assets/") == string::npos &&
+        startScene.find('/') == string::npos &&
+        startScene.find('\\') == string::npos) {
+        startPath = string("data/scenes/") + startScene;
+    }
+
+    if (!sceneManager.loadInitialScene(startPath)) {
+        cout << "Warning: No se pudo cargar la escena inicial: " << startPath 
+             << ". Se permanecerá en pantalla vacía.\n";
+        // no salimos; el juego seguirá corriendo con pantalla vacía
+    }
+
+    // -------------------------
+    //  Loop principal
+    // -------------------------
+    Clock clock;
     while (window.isOpen()) {
-
-        Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == Event::Closed)
+        // Poll events
+        Event ev;
+        while (window.pollEvent(ev)) {
+            if (ev.type == Event::Closed) {
                 window.close();
+            }
+            // Pasar eventos a SceneManager para que Dialogue/Choices los procesen
+            sceneManager.handleEvent(ev);
         }
 
-        window.clear(Color(20, 20, 20)); // fondo temporal oscuro
-        window.draw(text);
+        // Update
+        float dt = clock.restart().asSeconds();
+        sceneManager.update(dt);
+
+        // Draw
+        window.clear(Color(10, 10, 10));
+        sceneManager.draw(window);
         window.display();
     }
 
-    return 0;
+    return 0; // exit normal
 }
