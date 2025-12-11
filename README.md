@@ -22,9 +22,55 @@ Además, es probable que se incorporen de forma gradual las siguientes herramien
 - **Aseprite**
   - Sprites semi-pixelart
 - **nlohmann/json**
-  - Diálogos y estructura de escenas
+  - Diálogos y estructura de escenas en formato .json
 
 *(Estas dependencias pueden cambiar o ampliarse a medida que avance el desarrollo...)*
+
+## Dispocision de carpetas
+
+/game
+├── assets/
+│   ├── audio/
+│   ├── fonts/
+│   └── images/
+│   │   ├── characters/
+│   │   ├── backgrounds/
+│   │   ├── ui/
+│   │   ├── effects/
+│   │   └── icon.png (o .ico)
+├── data/
+│   ├── game_config.json
+│   ├── scenes/
+│   │   ├── prologue.json
+│   │   └── [...]
+│   └── autosave.json (opcional)
+├── src/
+│   ├── core/
+│   │   ├── ResourceManager.h
+│   │   ├── ResourceManager.cpp
+│   │   ├── Menu.h
+│   │   └── Menu.cpp
+│   ├── visualnovel/
+│   │   ├── DialogueManager.h
+│   │   ├── DialogueManager.cpp
+│   │   ├── Scene.h
+│   │   ├── Scene.cpp
+│   │   ├── DialogueBox.h
+│   │   ├── DialogueBox.cpp
+│   │   ├── VoiceBlip.h
+│   │   └── VoiceBlip.cpp
+│   ├── graphics/
+│   │   ├── SpriteAnimator.h
+│   │   ├── SpriteAnimator.cpp
+│   │   ├── TransitionEffects.h
+│   │   └── TransitionEffects.cpp
+│   ├── save/
+│   │   ├── SaveManager.h
+│   │   └── SaveManager.cpp
+│   └── logs.txt
+├── game.exe
+├── main.cpp
+└── README.txt
 
 ## Nota
 
