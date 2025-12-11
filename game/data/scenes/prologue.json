@@ -1,0 +1,50 @@
+{
+  "id": "prologue",
+  "bg": "images/backgrounds/hospital_room.png",
+  "music": "audio/ambience_hospital.ogg",
+  "character": {
+    "frame1": "assets/images/characters/test_01.png",
+    "frame2": "assets/images/characters/test_02.png",
+    "fps": 4,
+    "x": 960,
+    "y": 520
+  },
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": "Narrador",
+      "text": "Un vago recuerdo despierta en la habitacion."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Kami",
+      "text": "Donde estoy...? Todo se ve borroso..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade",
+      "duration": 0.8
+    },
+    {
+      "type": "change_bg",
+      "bg": "images/backgrounds/childhood_home.png"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Kami (Niño)",
+      "text": "Recuerdo un parque, un columpio y risas..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Kami (Niño)",
+      "text": "Ahora que todo esto esta aquí... que deberia hacer? Es acaso esta una nueva oportunidad para mi? podria mejorar si es que tengo la\noportunidad de cambiar de nuevo e mi vida...?"
+    },
+    {
+      "type": "choice",
+      "choices": [
+        { "text": "Ir al parque", "goto": "scene_park.json", "flag": "park_chosen" },
+        { "text": "Volver a casa", "goto": "scene_home.json", "flag": "home_chosen" }
+      ]
+    }
+  ]
+}

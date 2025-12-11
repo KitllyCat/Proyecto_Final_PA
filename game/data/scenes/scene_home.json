@@ -1,0 +1,43 @@
+{
+    "id": "scene_home",
+    "bg": "images/backgrounds/home_livingroom.png",
+
+    "steps": [
+        {
+            "type": "dialogue",
+            "speaker": "Narrador",
+            "text": "Kami regresa a casa. El calido aroma de madera y luz tenue le envuelve en una sensacion familiar... demasiado familiar."
+        },
+        {
+            "type": "dialogue",
+            "speaker": "Kami (niño)",
+            "character": "assets/images/characters/kami_child_idle.png",
+            "voice": "child",
+            "text": "Mi casa... se siente igual que antes. Como si nunca hubiera crecido."
+        },
+        {
+            "type": "dialogue",
+            "speaker": "Narrador",
+            "text": "Las paredes parecen susurrar historias del pasado, viejas heridas y risas olvidadas."
+        },
+        {
+            "type": "dialogue",
+            "speaker": "Kami (niño)",
+            "voice": "child",
+            "text": "Deberia explorar un poco...?"
+        },
+        {
+            "type": "choice",
+            "choices": [
+                {
+                    "text": "Entrar a tu habitacion",
+                    "next": "data/scenes/scene_bedroom.json"
+                },
+                {
+                    "text": "Sentarte en la sala",
+                    "next": "data/scenes/scene_home_rest.json"
+                }
+            ]
+        }
+    ]
+}

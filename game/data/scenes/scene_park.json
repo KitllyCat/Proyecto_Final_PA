@@ -1,0 +1,44 @@
+{
+    "id": "scene_park",
+    "bg": "images/backgrounds/park_day.png",
+
+    "steps": [
+        {
+            "type": "dialogue",
+            "speaker": "Narrador",
+            "text": "Kami abre los ojos y respira profundamente. El aire fresco del parque le recuerda a aquellos dias en los que aun podia ser feliz sin motivo alguno."
+        },
+        {
+            "type": "dialogue",
+            "speaker": "Kami (niño)",
+            "character": "assets/images/characters/kami_child_idle.png",
+            "voice": "child",
+            "text": "Otra vez estoy aqui? El parque... Se siente igual que como lo recordaba."
+        },
+        {
+            "type": "dialogue",
+            "speaker": "Narrador",
+            "text": "A su alrededor, las hojas se mueven con un suave vaiven. Los recuerdos flotan entre los sonidos del viento."
+        },
+        {
+            "type": "dialogue",
+            "speaker": "Kami (niño)",
+            "character": "assets/images/characters/kami_child_idle.png",
+            "voice": "child",
+            "text": "Que deberia hacer ahora...?"
+        },
+        {
+            "type": "choice",
+            "choices": [
+                {
+                    "text": "Ir a casa",
+                    "next": "data/scenes/scene_home.json"
+                },
+                {
+                    "text": "Quedarte un momento y observar",
+                    "next": "data/scenes/scene_park_observe.json"
+                }
+            ]
+        }
+    ]
+}
