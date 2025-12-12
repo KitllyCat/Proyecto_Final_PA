@@ -27,7 +27,7 @@ Además, es probable que se incorporen de forma gradual las siguientes herramien
 *(Estas dependencias pueden cambiar o ampliarse a medida que avance el desarrollo...)*
 
 ## Dispocision de carpetas
-
+```bash
 /game
 ├── assets/
 │   ├── audio/
@@ -71,7 +71,7 @@ Además, es probable que se incorporen de forma gradual las siguientes herramien
 ├── game.exe
 ├── main.cpp
 └── README.txt
-
+```
 ## Nota
 
 Este README será actualizado progresivamente conforme el proyecto avance...
