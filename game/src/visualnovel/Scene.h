@@ -9,6 +9,7 @@
 #include "../core/ResourceManager.h"
 #include "DialogueBox.h"
 #include "../graphics/SpriteAnimator.hpp"
+#include "../save/SaveManager.h"
 
 using namespace std;
 using namespace sf;
@@ -28,7 +29,7 @@ struct SceneStep {
 class Scene {
 public:
     Scene();
-    bool loadFromFile(const string& path, ResourceManager& resources);
+    bool loadFromFile(const string& path, ResourceManager& res, int startIndex=0);
 
     void update(float dt);
     void handleEvent(const Event& ev);
@@ -43,23 +44,26 @@ private:
     vector<SceneStep> steps;
     size_t currentIndex;
 
-    // fondo
+    // Background
     Sprite bgSprite;
 
-    // personaje animado (opcional)
+    // Character (optional)
     Sprite characterSprite;
     unique_ptr<SpriteAnimator> characterAnimator;
-    Vector2f characterPosition; // posición para dibujar personaje
+    Vector2f characterPosition;
     bool hasCharacter;
 
-    // diálogo
+    // Dialogue
     unique_ptr<DialogueBox> dialogue;
 
+    // Control
     bool waitingChoice;
     bool finished;
     string nextScene;
     string basePath;
+    string scenePath; 
 
+    // Helpers
     void startStep(const SceneStep& s);
     void advanceStep();
     string dirname(const string& path);

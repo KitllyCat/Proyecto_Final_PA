@@ -17,7 +17,10 @@ public:
     bool loadInitialScene(const string& scenePath);
 
     // carga cualquier escena (ruta relativa)
-    bool loadScene(const string& scenePath);
+    //bool loadScene(const string& scenePath);
+    
+    bool loadScene(const string& path, int startStep=0);
+
 
     // update / draw / events
     void update(float dt);

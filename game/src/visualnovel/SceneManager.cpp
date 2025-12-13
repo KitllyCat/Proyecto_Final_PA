@@ -10,7 +10,7 @@ bool SceneManager::loadInitialScene(const string& scenePath) {
     return loadScene(scenePath);
 }
 
-bool SceneManager::loadScene(const string& scenePath) {
+/*bool SceneManager::loadScene(const string& scenePath) {
     cout << "SceneManager: cargando escena: " << scenePath << endl;
     auto s = make_unique<Scene>();
     if (!s->loadFromFile(scenePath, resources)) {
@@ -20,7 +20,13 @@ bool SceneManager::loadScene(const string& scenePath) {
     currentScene = move(s);
     currentPath = scenePath;
     return true;
+}*/
+
+bool SceneManager::loadScene(const string& path, int startStep) {
+    currentScene = make_unique<Scene>();
+    return currentScene->loadFromFile(path, resources, startStep);
 }
+
 
 void SceneManager::update(float dt) {
     if (!currentScene) return;
