@@ -13,7 +13,7 @@
         "animate_fps": 6
     },
     "palette": {
-      "name": "PaperPixels",
+      "name": "PaperPixels", 
       "colors": {
         "beige_light": "#F3E6D3",
         "sand_soft": "#EAD7B7",

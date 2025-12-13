@@ -7,13 +7,16 @@
     "frame2": "assets/images/characters/test_02.png",
     "fps": 4,
     "x": 960,
-    "y": 520
+    "y": 520,
+    "voice": "assets/audio/voice_blip.wav",
+    "voice_volume": 60
   },
   "steps": [
     {
       "type": "dialogue",
       "speaker": "Narrador",
-      "text": "Un vago recuerdo despierta en la habitacion."
+      "text": "Un vago recuerdo despierta en la habitacion.",
+      "voice": "assets/audio/voice_blip.wav"
     },
     {
       "type": "dialogue",
@@ -24,6 +27,9 @@
       "type": "transition",
       "effect": "fade",
       "duration": 0.8
+    },
+    {
+      "type": "checkpoint"
     },
     {
       "type": "change_bg",
@@ -37,7 +43,8 @@
     {
       "type": "dialogue",
       "speaker": "Kami (Niño)",
-      "text": "Ahora que todo esto esta aquí... que deberia hacer? Es acaso esta una nueva oportunidad para mi? podria mejorar si es que tengo la\noportunidad de cambiar de nuevo e mi vida...?"
+      "text": "Ahora que todo esto esta aquí... que deberia hacer? Es acaso esta una nueva oportunidad para mi? podria mejorar si es que\ntengo la oportunidad de cambiar de nuevo e mi vida...?",
+      "voice": ""
     },
     {
       "type": "choice",
