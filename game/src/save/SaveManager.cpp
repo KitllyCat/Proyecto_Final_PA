@@ -48,3 +48,9 @@ bool SaveManager::hasSave() const {
 void SaveManager::clear() {
     remove(savePath.c_str());
 }
+
+bool SaveManager::exists() const {
+    ifstream file(savePath);
+    return file.good();
+}
+

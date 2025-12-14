@@ -15,7 +15,8 @@ public:
 
     bool hasSave() const;
     void clear();
-
+    
+    bool exists() const;
 private:
     SaveManager() = default;
     string savePath = "data/autosave.json";
