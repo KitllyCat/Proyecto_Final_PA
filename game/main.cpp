@@ -3,7 +3,7 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include "json.hpp"
-
+#include <windows.h>
 #include "src/core/ResourceManager.h"
 #include "src/visualnovel/SceneManager.h"
 #include "src/save/SaveManager.h"
@@ -19,7 +19,8 @@ enum class GameState {
 };
 
 int main() {
-    json config;
+    SetConsoleOutputCP(CP_UTF8);
+	json config;
     ifstream cfg("data/game_config.json");
 
     if (!cfg.is_open()) {
@@ -37,13 +38,15 @@ int main() {
     string TITLE = config["window"].value("title", "Remoria");
 
     RenderWindow window(VideoMode(WIDTH, HEIGHT), TITLE, Style::Close);
-    window.setFramerateLimit(60);
-
-    ResourceManager resources;
-    SceneManager sceneManager(resources);
-
-    //Constructor correcto
-    MainMenu menu(resources, window.getSize());
+	window.setFramerateLimit(60);
+	
+	ResourceManager resources;
+	SceneManager sceneManager(resources);
+	
+	// NUEVO: Configurar tamaño de pantalla para transiciones
+	sceneManager.setScreenSize(window.getSize());
+	
+	MainMenu menu(resources, window.getSize());
 	menu.playMusic();
 
     GameState state = GameState::Menu;
@@ -66,14 +69,24 @@ int main() {
         if (state == GameState::Menu) {
             menu.update(dt);
 
-            //NUEVA PARTIDA
+            // NUEVA PARTIDA
             if (menu.startNewGameRequested()) {
+                cout << "[Main] Iniciando nueva partida..." << endl;
+                
+                // ✅ DETENER MÚSICA DEL MENÚ
+                menu.stopMusic();
+                
                 SaveManager::getInstance().clear();
                 sceneManager.loadScene("data/scenes/prologue.json", 0);
                 state = GameState::Playing;
             }
-            //CONTINUAR
+            // CONTINUAR
             else if (menu.continueRequested()) {
+                cout << "[Main] Cargando partida guardada..." << endl;
+                
+                // ✅ DETENER MÚSICA DEL MENÚ
+                menu.stopMusic();
+                
                 string sceneId;
                 int step = 0;
                 if (SaveManager::getInstance().load(sceneId, step)) {
@@ -84,9 +97,9 @@ int main() {
                     state = GameState::Playing;
                 }
             }
-            // ⭐ CRÉDITOS (opcional, listo para usar)
+            // CRÉDITOS (opcional)
             else if (menu.creditsRequested()) {
-                cout << "Creditos (pendiente)\n";
+                cout << "[Main] Mostrando créditos (pendiente)" << endl;
             }
         }
         else {
