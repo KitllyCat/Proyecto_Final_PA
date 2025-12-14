@@ -1,8 +1,22 @@
 {
     "id": "scene_park",
-    "bg": "images/backgrounds/park_day.png",
-
+    "bg": "assets/images/backgrounds/park_day.png",
+    "music": "assets/audio/Careful_Pufino.wav",
+    "character": {
+        "frame1": "assets/images/characters/test_01.png",
+        "frame2": "assets/images/characters/test_02.png",
+        "fps": 4,
+        "x": 960,
+        "y": 520,
+        "voice": "assets/audio/voice_blip.wav",
+        "voice_volume": 60
+    },
     "steps": [
+        {
+            "type": "transition",
+            "effect": "fade_from_black",
+            "duration": 1.0
+        },
         {
             "type": "dialogue",
             "speaker": "Narrador",

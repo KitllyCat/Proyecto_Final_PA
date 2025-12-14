@@ -1,6 +1,16 @@
 {
     "id": "scene_home",
     "bg": "images/backgrounds/home_livingroom.png",
+    "music": "assets/audio/Sentimental_Pufino.wav",
+    "character": {
+        "frame1": "assets/images/characters/test_01.png",
+        "frame2": "assets/images/characters/test_02.png",
+        "fps": 4,
+        "x": 960,
+        "y": 520,
+        "voice": "assets/audio/voice_blip.wav",
+        "voice_volume": 60
+    },
 
     "steps": [
         {

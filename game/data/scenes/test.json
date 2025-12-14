@@ -1,0 +1,23 @@
+{
+  "id": "test_sfx",
+  "bg": "assets/images/test.png",
+  
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": "Sistema",
+      "text": "Presiona Space para escuchar un sonido de prueba..."
+    },
+    {
+      "type": "play_sfx",
+      "sfx": "assets/audio/effects/static-radio-recording.wav",
+      "sound": "assets/audio/effects/static-radio-recording.wav",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Sistema",
+      "text": "¿Lo escuchaste?"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "id": "prologue",
-  "bg": "images/backgrounds/hospital_room.png",
-  "music": "audio/ambience_hospital.ogg",
+  "bg": "assets/images/backgrounds/hospital_room.png",
+  "music": "assets/audio/Thoughtful_Pufino.wav",
   "character": {
     "frame1": "assets/images/characters/test_01.png",
     "frame2": "assets/images/characters/test_02.png",
@@ -12,6 +12,11 @@
     "voice_volume": 60
   },
   "steps": [
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.0
+    },
     {
       "type": "dialogue",
       "speaker": "Narrador",
@@ -26,14 +31,20 @@
     {
       "type": "transition",
       "effect": "fade",
-      "duration": 0.8
-    },
-    {
-      "type": "checkpoint"
+      "duration": 1.0
     },
     {
       "type": "change_bg",
-      "bg": "images/backgrounds/childhood_home.png"
+      "bg": "assets/images/backgrounds/childhood_home.png",
+      "music": "assets/audio/FNAC-3-Tape-Music_Secret-Tape.ogg"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.0
+    },
+    {
+      "type":"checkpoint"
     },
     {
       "type": "dialogue",
