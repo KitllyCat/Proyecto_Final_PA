@@ -31,6 +31,7 @@ private:
     ResourceManager& resources;
 
     Sprite background;
+    Sprite filter;
     Font* font;
 	Text title;
 	Font* titleFont;

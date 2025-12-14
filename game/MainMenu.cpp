@@ -8,6 +8,7 @@ MainMenu::MainMenu(ResourceManager& res, Vector2u windowSize)
 
     // Fondo
     background.setTexture(resources.getTexture("assets/images/menu_bg.png"));
+    filter.setTexture(resources.getTexture("assets/images/vignette_filter.png"));
 
     // Fuente
     font = &resources.getFont("assets/fonts/default.ttf");
@@ -96,6 +97,7 @@ void MainMenu::draw(RenderWindow& window) {
     drawBtn(btnNew);
     drawBtn(btnContinue);
     drawBtn(btnCredits);
+    window.draw(filter);
 }
 
 bool MainMenu::startNewGameRequested() const { return newGame; }
@@ -106,7 +108,7 @@ void MainMenu::playMusic() {
     if (menuMusic.getStatus() == Music::Playing)
         return;
 
-    if (!menuMusic.openFromFile("assets/audio/menu_theme.ogg")) {
+    if (!menuMusic.openFromFile("assets/audio/nostalgic_childhood.ogg")) {
         cout << "ERROR: No se pudo cargar musica del menu\n";
         return;
     }
