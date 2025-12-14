@@ -2,6 +2,7 @@
 #define SCENE_MANAGER_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <memory>
 #include "../core/ResourceManager.h"
@@ -13,27 +14,39 @@ using namespace sf;
 class SceneManager {
 public:
     SceneManager(ResourceManager& res);
-    // carga la escena inicial
+    ~SceneManager();
+    
+    // Carga la escena inicial
     bool loadInitialScene(const string& scenePath);
 
-    // carga cualquier escena (ruta relativa)
-    //bool loadScene(const string& scenePath);
-    
-    bool loadScene(const string& path, int startStep=0);
+    // Carga cualquier escena (con step opcional para continuar)
+    bool loadScene(const string& path, int startStep = 0);
 
-
-    // update / draw / events
+    // Update / Draw / Events
     void update(float dt);
     void handleEvent(const Event& ev);
     void draw(RenderWindow& window);
 
-    // devuelve el path de la escena actual
+    // Devuelve el path de la escena actual
     string currentScenePath() const;
+    
+    void setScreenSize(Vector2u size);
 
 private:
     ResourceManager& resources;
     unique_ptr<Scene> currentScene;
     string currentPath;
+    
+    // ✅ Sistema de música
+    Music sceneMusic;
+    string currentMusicPath;
+    
+    // Helpers privados
+    void loadMusicFromJSON(const string& scenePath);
+    void loadMusic(const string& musicPath);
+    void stopMusic();
+    
+    Vector2u screenSize; //resolucion pantalla
 };
 
 #endif

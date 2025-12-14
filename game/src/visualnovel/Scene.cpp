@@ -14,9 +14,19 @@ Scene::Scene()
   hasCharacter(false),
   characterPosition(800.f, 400.f),
   waitingChoice(false),
-  finished(false)
+  finished(false),
+  onMusicChange(nullptr),
+  waitingTransition(false)  // ← NUEVO
 {
 }
+
+void Scene::setScreenSize(Vector2u size) {
+    transition.setScreenSize(size);
+}
+
+void Scene::setMusicChangeCallback(MusicChangeCallback callback) {
+       onMusicChange = callback;
+   }
 
 string Scene::dirname(const string& path) {
     size_t p = path.find_last_of("/\\");
@@ -108,10 +118,17 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
         if (s.type == "dialogue") {
             s.speaker = item.value("speaker", "");
             s.text = item.value("text", "");
-        }
+	        if (item.contains("sfx")) {
+				s.sfx_path = item.value("sfx", "");
+				s.sfx_volume = item.value("sfx_volume", 100.0f);
+			}
+		}
         else if (s.type == "change_bg") {
-            s.bg_path = item.value("bg", "");
-        }
+	       s.bg_path = item.value("bg", "");
+	       if (item.contains("music")) {
+	           s.music_path = item.value("music", "");
+	       }
+	   	}
         else if (s.type == "choice") {
             for (auto& c : item["choices"]) {
                 SceneStep::Choice ch;
@@ -119,7 +136,17 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
                 ch.goto_scene = c.value("goto", "");
                 s.choices.push_back(ch);
             }
-        }
+        }else if (s.type == "play_sfx") {
+		    s.sfx_path = item.value("sound", "");
+		    if (s.sfx_path.empty()) {
+		        s.sfx_path = item.value("sfx", "");
+		    }
+		    s.sfx_volume = item.value("volume", 100.0f);
+		}else if (s.type == "transition") {
+		    s.effect = item.value("effect", "fade");
+		    s.duration = item.value("duration", 1.0f);
+		    cout << "[Scene] transition: " << s.effect << " (" << s.duration << "s)" << endl;
+		}
         // checkpoint no necesita datos
         steps.push_back(s);
     }
@@ -141,10 +168,12 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
 }
 
 void Scene::startStep(const SceneStep& s) {
+    // Limpiar sonidos terminados
+    cleanupFinishedSounds();
+    
     if (s.type == "checkpoint") {
         string id = scenePath.substr(scenePath.find_last_of("/\\") + 1);
         id = id.substr(0, id.find(".json"));
-
         SaveManager::getInstance().save(id, currentIndex);
         advanceStep();
         return;
@@ -152,13 +181,44 @@ void Scene::startStep(const SceneStep& s) {
 
     if (s.type == "dialogue") {
         dialogue->setDialogue(s.speaker, s.text);
+        if (!s.sfx_path.empty()) {
+            playSFX(s.sfx_path, s.sfx_volume);
+        }
     }
     else if (s.type == "change_bg") {
         string full = pathLooksLikeAssets(s.bg_path)
                     ? s.bg_path
                     : basePath + "/" + s.bg_path;
         bgSprite.setTexture(resources->getTexture(full));
+        
+        if (!s.music_path.empty() && onMusicChange) {
+            onMusicChange(s.music_path);
+        }
+        
         advanceStep();
+    }
+    else if (s.type == "play_sfx") {
+        if (!s.sfx_path.empty()) {
+            playSFX(s.sfx_path, s.sfx_volume);
+        }
+        advanceStep();
+    }
+    //NUEVO: Manejar transiciones
+    else if (s.type == "transition") {
+        cout << "[Scene] Iniciando transición: " << s.effect << endl;
+        
+        if (s.effect == "fade" || s.effect == "fade_to_black") {
+            transition.start(TransitionManager::Type::FADE_TO_BLACK, s.duration);
+            waitingTransition = true;
+        }
+        else if (s.effect == "fade_from_black") {
+            transition.start(TransitionManager::Type::FADE_FROM_BLACK, s.duration);
+            waitingTransition = true;
+        }
+        else {
+            cout << "[Scene] Efecto de transición desconocido: " << s.effect << endl;
+            advanceStep();
+        }
     }
     else if (s.type == "choice") {
         waitingChoice = true;
@@ -177,36 +237,127 @@ void Scene::advanceStep() {
 }
 
 void Scene::update(float dt) {
+    // Limpiar sonidos periódicamente
+    static float cleanupTimer = 0.0f;
+    cleanupTimer += dt;
+    if (cleanupTimer >= 0.5f) {
+        cleanupFinishedSounds();
+        cleanupTimer = 0.0f;
+    }
+    
+    // ✅ NUEVO: Actualizar transición activa
+    if (waitingTransition) {
+        transition.update(dt);
+        
+        // Si la transición terminó, avanzar al siguiente step
+        if (transition.isComplete()) {
+		    cout << "[Scene] Transición completada" << endl;
+		    waitingTransition = false;
+		    transition.reset();
+		    advanceStep();
+		}
+        
+        // Mientras hay transición, no actualizar diálogos ni personajes
+        return;
+    }
+    
+    // Actualizar diálogos y animaciones (solo si no hay transición)
     if (dialogue) dialogue->update(dt);
     if (hasCharacter && characterAnimator)
         characterAnimator->update(dt);
 }
 
 void Scene::handleEvent(const Event& ev) {
-    if (dialogue) dialogue->handleEvent(ev);
-
-    if (waitingChoice && dialogue->isWaitingForAdvance()) {
+    // ✅ NUEVO: No procesar eventos durante transiciones
+    if (waitingTransition) {
+        // Opcionalmente, permitir saltar la transición con Escape
+        if (ev.type == Event::KeyPressed && ev.key.code == Keyboard::Escape) {
+            cout << "[Scene] Transición saltada por usuario" << endl;
+            transition.complete();
+        }
+        return;
+    }
+    
+    // Resto del código de handleEvent (sin cambios)
+    if (waitingChoice) {
         if (ev.type == Event::KeyPressed) {
             int n = ev.key.code - Keyboard::Num1;
+            
             if (n >= 0 && n < (int)steps[currentIndex].choices.size()) {
-                nextScene = steps[currentIndex].choices[n].goto_scene;
+                string chosen = steps[currentIndex].choices[n].goto_scene;
+                
+                cout << "[Scene] Opción elegida: " << (n + 1) 
+                     << " -> " << chosen << endl;
+                
+                if (chosen.empty()) {
+                    cerr << "[Scene] ERROR: choice sin goto_scene válido" << endl;
+                    waitingChoice = false;
+                    finished = true;
+                    return;
+                }
+                
+                nextScene = chosen;
                 waitingChoice = false;
                 finished = true;
             }
         }
+        return;
     }
-    else if (dialogue && dialogue->isIdle() && !finished) {
+    
+    if (dialogue) {
+        dialogue->handleEvent(ev);
+    }
+    
+    if (dialogue && dialogue->isIdle() && !finished && !waitingChoice) {
         advanceStep();
     }
 }
 
 void Scene::draw(RenderWindow& window) {
+    // Dibujar fondo
     window.draw(bgSprite);
+    
+    // Dibujar personaje
     if (hasCharacter)
         window.draw(characterSprite);
+    
+    // Dibujar diálogo
     if (dialogue)
         dialogue->draw(window);
+    
+    // NUEVO: Dibujar transición POR ENCIMA DE TODO
+    transition.draw(window);
 }
 
 bool Scene::isFinished() const { return finished; }
 string Scene::getNextScene() const { return nextScene; }
+
+void Scene::playSFX(const string& path, float volume) {
+    if (!resources) return;
+    
+    try {
+        string fullPath = pathLooksLikeAssets(path) ? path : basePath + "/" + path;
+        SoundBuffer& buffer = resources->getSound(fullPath);
+        
+        Sound sound;
+        sound.setBuffer(buffer);
+        sound.setVolume(volume);
+        sound.play();
+        
+        activeSounds.push_back(sound);
+    }
+    catch (const exception& e) {
+        cerr << "[Scene ERROR] SFX: " << e.what() << endl;
+    }
+}
+
+void Scene::cleanupFinishedSounds() {
+    auto it = activeSounds.begin();
+    while (it != activeSounds.end()) {
+        if (it->getStatus() == Sound::Stopped) {
+            it = activeSounds.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
