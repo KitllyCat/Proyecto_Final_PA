@@ -11,7 +11,7 @@ public:
     MainMenu(ResourceManager& resources, Vector2u windowSize);
 
     void handleEvent(const Event& ev, const RenderWindow& window);
-    void update(float dt);
+    void update(float dt, const RenderWindow& window);
     void draw(RenderWindow& window);
 
     bool startNewGameRequested() const;
@@ -23,10 +23,13 @@ public:
 
 private:
     struct Button {
-        Sprite sprite;
-        Text text;
-        bool enabled = true;
-    };
+	    Sprite sprite;
+	    Text text;
+	    Texture* normal = nullptr;
+	    Texture* hover = nullptr;
+	    Texture* disabled = nullptr;
+	    bool enabled = true;
+	};
 
     ResourceManager& resources;
 
@@ -35,10 +38,19 @@ private:
     Font* font;
 	Text title;
 	Font* titleFont;
+	Text titleShadow;
     Button btnNew;
     Button btnContinue;
     Button btnCredits;
 	Music menuMusic;
+	
+	Sprite bgSprite;
+	Texture* bgFrame1;
+	Texture* bgFrame2;
+	
+	float bgTimer = 0.f;
+	float bgFrameTime = 0.8f;
+	bool bgToggle = false;
 	
     bool newGame = false;
     bool cont = false;

@@ -67,7 +67,7 @@ int main() {
         float dt = clock.restart().asSeconds();
 
         if (state == GameState::Menu) {
-            menu.update(dt);
+            menu.update(dt, window);
 
             // NUEVA PARTIDA
             if (menu.startNewGameRequested()) {
