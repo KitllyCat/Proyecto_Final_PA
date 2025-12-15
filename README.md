@@ -81,24 +81,39 @@ Además, es probable que se incorporen de forma gradual las siguientes herramien
 ## Builds
 
 El juego en desarrollo tuvo diferentes builds finalizadas con una parte del progreso que avanzaba relativamente. Progresion del juego:
-- pre-alpha   v0.1:
+- **pre-alpha   v0.1:**
+
 Fase inicial, primeros archivos creados y base con RecourceManger, DialogueBox, SceneManager y Scene han sido creados. Solo tiene lectura de .json basica con strings limitados y todo silencio.
 
-- pre-alpha   v0.2:
+- **pre-alpha   v0.2:**
+
 Continuacion de la fase inicial, ahora con el SpriteAnimator, se pueden importar imagenes como personajes y animarlos, aun asi el juego se sigue viendo tosco y en desarrollo.
 
-- alpha       v0.3:
+- **alpha       v0.3:**
+
 Se implemento el VoiceBlip y las Transiciones entre escenas base. Se siente con un poco mas de vida, pero faltan implementr mas cosas, tambien ahora se puede cargar musica desde .json
 
-- pre-build   v0.4:
+- **pre-build   v0.4:**
+
 Aqui se creo el MainMenu, un diseño rudimentario y tosco con escalibilidad de mejorarse mas adelante. Funciones en los demas archivos pulidas y un sistema de flags añadido.
 
-- pre-alpha   v0.5:
+- **pre-alpha   v0.5:**
+
 Se añadio el IntroScreen y CreditsScreen. Estas nuevas funcionalidades daban vida al juego, que a su vez se mejoro relativamente el MainMenu visualmente. Se encontro un bug critico.
 
-- build       v0.6:
+- **build       v0.6:**
+
 Bug critico con los creditos y un bucle infinito de loop solucionado. Se añadio un icono al juego, ademas de mejoro el sistema de cargado de texturas al no usar punteros inexistentes. El cargado de .json ya esta disponible para el desarrollo de escenas y desde este punto se puede comenzar a trabajar en el juego en sí, pero siempre revisando el codigo.
+
 *(Siendo esta la ultima actualizacion disponible...)*
+
+## Compilacion del juego
+
+Puedes descargar el game.rar, y luego descomprimirlo para poder jugarlo. Se encontrara el ejecutable .exe listo para su uso.
+
+En caso que se desee compilar desde 0 el juego, el prodecimiento se explica en el siguiente docs:
+
+[![Google Docs](https://img.shields.io/badge/Google%20Docs-4285F4?style=flat&logo=google&logoColor=white)](https://docs.google.com/document/d/1U7nhNjDhPBOscAGJqNWPGV12pQJSWbbs4f7op4hos8U/edit?usp=sharing)
 
 ## Nota
 
