@@ -31,9 +31,7 @@ void TransitionManager::start(Type type, float dur) {
     active = true;
     completed = false;
 
-    cout << "[Transition] Iniciando: " 
-         << (type == Type::FADE_TO_BLACK ? "FADE_TO_BLACK" : "FADE_FROM_BLACK")
-         << " duración: " << duration << "s" << endl;
+    cout << "[Transition] Iniciando... "<< endl;
 }
 
 void TransitionManager::update(float dt) {

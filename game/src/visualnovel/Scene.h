@@ -11,7 +11,7 @@
 #include "../core/ResourceManager.h"
 #include "DialogueBox.h"
 #include "../graphics/SpriteAnimator.hpp"
-#include "../graphics/TransitionManager.h"  // ← NUEVO
+#include "../graphics/TransitionManager.h"
 #include "../save/SaveManager.h"
 
 using namespace std;
@@ -20,6 +20,7 @@ using json = nlohmann::json;
 
 typedef function<void(const string&)> MusicChangeCallback;
 
+// ÚNICO struct SceneStep con Choice ACTUALIZADA
 struct SceneStep {
     string type;
     string speaker;
@@ -28,9 +29,18 @@ struct SceneStep {
     string music_path;
     string sfx_path;
     float sfx_volume;
-    string effect;         // Para transiciones: "fade", etc.
-    float duration;        // Duración de la transición
-    struct Choice { string text; string goto_scene; string flag; };
+    string effect;
+    float duration;
+    
+    // Choice con TODOS los campos necesarios
+    struct Choice { 
+        string text;
+        string goto_scene;
+        int goto_step;
+        string flag;
+        string require_flag;
+    };
+    
     vector<Choice> choices;
 };
 
@@ -40,8 +50,6 @@ public:
     bool loadFromFile(const string& path, ResourceManager& res, int startIndex=0);
 
     void setMusicChangeCallback(MusicChangeCallback callback);
-    
-    // ✅ NUEVO: Configurar tamaño de pantalla para transiciones
     void setScreenSize(Vector2u size);
 
     void update(float dt);
@@ -83,9 +91,9 @@ private:
     vector<Sound> activeSounds;
     vector<SoundBuffer*> soundBuffers;
     
-    // ✅ NUEVO: Sistema de transiciones
+    // Sistema de transiciones
     TransitionManager transition;
-    bool waitingTransition;  // Si estamos esperando que termine una transición
+    bool waitingTransition;
 
     // Helpers
     void startStep(const SceneStep& s);
