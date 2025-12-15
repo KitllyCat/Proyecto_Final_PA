@@ -4,62 +4,69 @@
 using namespace sf;
 
 MainMenu::MainMenu(ResourceManager& res, Vector2u windowSize)
-: resources(res) {
+: resources(res),
+  bgFrame1(res.getTexture("assets/images/menu_bg_1.png")),
+  bgFrame2(res.getTexture("assets/images/menu_bg_2.png")),
+  titleFrame1(res.getTexture("assets/images/ui/title_01.png")),
+  titleFrame2(res.getTexture("assets/images/ui/title_02.png"))
+{
     // Fondo
-    bgFrame1 = &resources.getTexture("assets/images/menu_bg_1.png");
-	bgFrame2 = &resources.getTexture("assets/images/menu_bg_2.png");
-	bgSprite.setTexture(*bgFrame1);
-    filter.setTexture(resources.getTexture("assets/images/vignette_filter.png"));
+    bgSprite.setTexture(bgFrame1);
+
+    filter.setTexture(
+        resources.getTexture("assets/images/vignette_filter.png")
+    );
 
     // Fuente
     font = &resources.getFont("assets/fonts/title.ttf");
-	titleFont = &resources.getFont("assets/fonts/title.ttf");
-	
-	title.setFont(*titleFont);
-	title.setString("Remoria...");
-	title.setCharacterSize(240);
-	title.setFillColor(Color(93, 35, 31));
-	
-	// Posición base
-	Vector2f titlePos(120.f, 360.f);
-	title.setPosition(titlePos);
-	
-	titleShadow = title;
-	titleShadow.setFillColor(Color(61, 13, 30, 110));
-	titleShadow.move(6.f, 6.f);
 
-	// Posición izquierda
-	title.setPosition(120.f, 380.f);
-	
-    // Botones
-    setupButton(btnNew, "Nuevo Juego", { windowSize.x * 0.68f, windowSize.y * 0.35f });
-    setupButton(btnContinue, "Continuar", { windowSize.x * 0.68f, windowSize.y * 0.50f });
-	btnCredits.sprite.setTexture(
-    resources.getTexture("assets/images/ui/button_smallx.png")
-	);
-	
-	Vector2f creditsPos(
-	    windowSize.x - btnCredits.sprite.getGlobalBounds().width - 40.f,
-	    windowSize.y - btnCredits.sprite.getGlobalBounds().height - 40.f
-	);
-	
-	btnCredits.sprite.setPosition(creditsPos);
-	
-	btnCredits.text.setFont(*font);
-	btnCredits.text.setString("Creditos");
-	btnCredits.text.setCharacterSize(28);
-	btnCredits.text.setFillColor(Color(61, 13, 30));
-	
-	// Centrar texto dentro del botón
-	FloatRect t = btnCredits.text.getLocalBounds();
-	btnCredits.text.setOrigin(t.width / 2, t.height / 2);
-	btnCredits.text.setPosition(
-	    creditsPos.x + btnCredits.sprite.getGlobalBounds().width / 2,
-	    creditsPos.y + btnCredits.sprite.getGlobalBounds().height / 2 - 2
-	);
-	
-    // Desactivar continuar si no hay save
+    // Título
+    titleSprite.setTexture(titleFrame1);
+    titleSprite.setPosition(120.f, 360.f);
+
+    // Botones principales
+    setupButton(btnNew, "Nuevo Juego",
+        { windowSize.x * 0.68f, windowSize.y * 0.35f });
+
+    setupButton(btnContinue, "Continuar",
+        { windowSize.x * 0.68f, windowSize.y * 0.50f });
+
     btnContinue.enabled = SaveManager::getInstance().exists();
+
+    // Botón Créditos
+    btnCredits.normal   = &resources.getTexture("assets/images/ui/button_smallx.png");
+    btnCredits.hover    = &resources.getTexture("assets/images/ui/button_smallx_hover.png");
+    btnCredits.disabled = btnCredits.normal;
+
+    btnCredits.sprite.setTexture(*btnCredits.normal);
+
+    Vector2f creditsPos(
+        windowSize.x - btnCredits.sprite.getGlobalBounds().width - 40.f,
+        windowSize.y - btnCredits.sprite.getGlobalBounds().height - 40.f
+    );
+
+    btnCredits.sprite.setPosition(creditsPos);
+
+    btnCredits.text.setFont(*font);
+    btnCredits.text.setString("Creditos");
+    btnCredits.text.setCharacterSize(28);
+    btnCredits.text.setFillColor(Color(61, 13, 30));
+
+    FloatRect t = btnCredits.text.getLocalBounds();
+    btnCredits.text.setOrigin(t.width / 2, t.height / 2);
+    btnCredits.text.setPosition(
+        creditsPos.x + btnCredits.sprite.getGlobalBounds().width / 2,
+        creditsPos.y + btnCredits.sprite.getGlobalBounds().height / 2 - 2
+    );
+
+    // Audio UI
+    clickBuffer = resources.getSound("assets/audio/effects/click.wav");
+    clickSound.setBuffer(clickBuffer);
+    clickSound.setVolume(50.f);
+
+    hoverBuffer = resources.getSound("assets/audio/effects/hover.wav");
+    hoverSound.setBuffer(hoverBuffer);
+    hoverSound.setVolume(40.f);
 }
 
 void MainMenu::setupButton(Button& btn, const string& label, Vector2f pos) {
@@ -89,12 +96,14 @@ void MainMenu::handleEvent(const Event& ev, const RenderWindow& window) {
         return;
 
     auto checkClick = [&](Button& btn, bool& flag) {
-        if (!btn.enabled) return;
-        if (btn.sprite.getGlobalBounds()
-            .contains((Vector2f)Mouse::getPosition(window))) {
-            flag = true;
-        }
-    };
+    if (!btn.enabled) return;
+
+    if (btn.sprite.getGlobalBounds()
+        .contains((Vector2f)Mouse::getPosition(window))) {
+        playClickSound();
+        flag = true;
+    }
+};
 
     checkClick(btnNew, newGame);
     checkClick(btnContinue, cont);
@@ -106,21 +115,37 @@ void MainMenu::update(float dt, const RenderWindow& window) {
     if (bgTimer >= bgFrameTime) {
         bgTimer = 0.f;
         bgToggle = !bgToggle;
-        bgSprite.setTexture(bgToggle ? *bgFrame2 : *bgFrame1);
+        bgSprite.setTexture(bgToggle ? bgFrame2 : bgFrame1);
     }
-
+	titleTimer += dt;
+	if (titleTimer >= titleFrameTime) {
+	    titleTimer = 0.f;
+	    titleToggle = !titleToggle;
+	
+	    titleSprite.setTexture(titleToggle ? titleFrame2 : titleFrame1);
+	}
     Vector2f mouse = (Vector2f)Mouse::getPosition(window);
 
-    auto updateHover = [&](Button& btn) {
+    bool wasHovering = false;
+
+	auto updateHover = [&](Button& btn) {
+		if (!btn.normal || !btn.hover || !btn.disabled) return;
 	    if (!btn.enabled) {
 	        btn.sprite.setTexture(*btn.disabled);
+	        btn.isHovered = false;
 	        return;
 	    }
-	    if (btn.sprite.getGlobalBounds().contains(mouse)) {
-	        btn.sprite.setTexture(*btn.hover);
-	    } else {
-	        btn.sprite.setTexture(*btn.normal);
+	
+	    bool hovering = btn.sprite.getGlobalBounds().contains(mouse);
+	
+	    // Solo cuando entra al botón
+	    if (hovering && !btn.isHovered) {
+	        hoverSound.stop();
+	        hoverSound.play();
 	    }
+	
+	    btn.sprite.setTexture(hovering ? *btn.hover : *btn.normal);
+	    btn.isHovered = hovering;
 	};
 
     updateHover(btnNew);
@@ -130,8 +155,7 @@ void MainMenu::update(float dt, const RenderWindow& window) {
 
 void MainMenu::draw(RenderWindow& window) {
 	window.draw(bgSprite);
-	window.draw(titleShadow);
-	window.draw(title);
+	window.draw(titleSprite);
     auto drawBtn = [&](Button& btn) {
         window.draw(btn.sprite);
         window.draw(btn.text);
@@ -164,4 +188,19 @@ void MainMenu::playMusic() {
 void MainMenu::stopMusic() {
     if (menuMusic.getStatus() == sf::Music::Playing)
         menuMusic.stop();
+}
+
+void MainMenu::playClickSound() {
+    clickSound.stop();
+    clickSound.play();
+}
+
+void MainMenu::resetCreditsRequest() {
+    credits = false;
+}
+
+void MainMenu::clearRequests() {
+    newGame = false;
+    cont = false;
+    credits = false;
 }

@@ -1,8 +1,9 @@
+// MainMenu.h
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <functional>
 #include "src/core/ResourceManager.h"
+
 using namespace sf;
 using namespace std;
 
@@ -13,50 +14,64 @@ public:
     void handleEvent(const Event& ev, const RenderWindow& window);
     void update(float dt, const RenderWindow& window);
     void draw(RenderWindow& window);
-
+	void resetCreditsRequest();
+	
     bool startNewGameRequested() const;
     bool continueRequested() const;
     bool creditsRequested() const;
-    
+
     void playMusic();
     void stopMusic();
 
 private:
     struct Button {
-	    Sprite sprite;
-	    Text text;
-	    Texture* normal = nullptr;
-	    Texture* hover = nullptr;
-	    Texture* disabled = nullptr;
-	    bool enabled = true;
-	};
+        Sprite sprite;
+        Text text;
+	    const Texture* normal;
+	    const Texture* hover;
+	    const Texture* disabled;
+        bool enabled = true;
+        bool isHovered = false;
+    };
 
     ResourceManager& resources;
 
-    Sprite background;
-    Sprite filter;
-    Font* font;
-	Text title;
-	Font* titleFont;
-	Text titleShadow;
+    // Fondo
+    Sprite bgSprite;
+    Sprite filter;              //FALTABA
+    const Texture& bgFrame1;
+	const Texture& bgFrame2;
+    float bgTimer = 0.f;
+    float bgFrameTime = 0.8f;   //FALTABA
+    bool bgToggle = false;
+
+    // Fuente
+    Font* font = nullptr;
+
+    // Título animado
+    Sprite titleSprite;
+	const Texture& titleFrame1;
+	const Texture& titleFrame2;
+    float titleTimer = 0.f;
+    float titleFrameTime = 0.9f; //FALTABA
+    bool titleToggle = false;
+    
+    // Botones
     Button btnNew;
     Button btnContinue;
     Button btnCredits;
-	Music menuMusic;
-	
-	Sprite bgSprite;
-	Texture* bgFrame1;
-	Texture* bgFrame2;
-	
-	float bgTimer = 0.f;
-	float bgFrameTime = 0.8f;
-	bool bgToggle = false;
+
+    Music menuMusic;
+	SoundBuffer clickBuffer;
+    Sound clickSound;
+    void playClickSound();
+	SoundBuffer hoverBuffer;
+	Sound hoverSound;
 	
     bool newGame = false;
     bool cont = false;
     bool credits = false;
-
+	void clearRequests();
+	
     void setupButton(Button& btn, const string& label, Vector2f pos);
-    void updateButton(Button& btn, const RenderWindow& window);
-    
 };
