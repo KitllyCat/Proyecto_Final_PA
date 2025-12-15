@@ -1,7 +1,7 @@
 {
   "id": "prologue",
   "bg": "assets/images/backgrounds/hospital_room.png",
-  "music": "assets/audio/Thoughtful_Pufino.wav",
+  "music": "assets/audio/Thoughtful_Pufino.ogg",
   "character": {
     "frame1": "assets/images/characters/test_01.png",
     "frame2": "assets/images/characters/test_02.png",
@@ -20,8 +20,7 @@
     {
       "type": "dialogue",
       "speaker": "Narrador",
-      "text": "Un vago recuerdo despierta en la habitacion.",
-      "voice": "assets/audio/voice_blip.wav"
+      "text": "Un vago recuerdo despierta en la habitacion"
     },
     {
       "type": "dialogue",

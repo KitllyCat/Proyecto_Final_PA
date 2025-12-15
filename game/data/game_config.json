@@ -6,7 +6,7 @@
         "icon": "assets/images/icon.png"
     },
     "audio": {
-        "master_volume": 100
+        "master_volume": 75
     },
     "visual": {
         "scale_factor": 6,

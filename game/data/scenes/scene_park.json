@@ -1,7 +1,7 @@
 {
     "id": "scene_park",
     "bg": "assets/images/backgrounds/park_day.png",
-    "music": "assets/audio/Careful_Pufino.wav",
+    "music": "assets/audio/Careful_Pufino.ogg",
     "character": {
         "frame1": "assets/images/characters/test_01.png",
         "frame2": "assets/images/characters/test_02.png",
@@ -27,12 +27,15 @@
             "speaker": "Kami (niño)",
             "character": "assets/images/characters/kami_child_idle.png",
             "voice": "child",
-            "text": "Otra vez estoy aqui? El parque... Se siente igual que como lo recordaba."
+            "text": "Otra vez estoy aqui...? El parque... Se siente igual que como lo recordaba..."
         },
         {
             "type": "dialogue",
             "speaker": "Narrador",
             "text": "A su alrededor, las hojas se mueven con un suave vaiven. Los recuerdos flotan entre los sonidos del viento."
+        },
+        {
+            "type":"checkpoint"
         },
         {
             "type": "dialogue",
