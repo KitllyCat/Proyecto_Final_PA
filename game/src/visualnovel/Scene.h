@@ -31,12 +31,12 @@ struct SceneStep {
     float sfx_volume;
     string effect;
     float duration;
-    
+    string goto_scene;
     // Choice con TODOS los campos necesarios
     struct Choice { 
         string text;
         string goto_scene;
-        int goto_step;
+        int goto_step = -1;
         string flag;
         string require_flag;
     };
@@ -72,6 +72,7 @@ private:
     Sprite characterSprite;
     unique_ptr<SpriteAnimator> characterAnimator;
     Vector2f characterPosition;
+    bool characterVisible;    
     bool hasCharacter;
 
     // Dialogue
@@ -83,13 +84,13 @@ private:
     string nextScene;
     string basePath;
     string scenePath;
+    int nextStartIndex;
     
     // Callback para música
     MusicChangeCallback onMusicChange;
     
     // SFX
-    vector<Sound> activeSounds;
-    vector<SoundBuffer*> soundBuffers;
+	vector<std::unique_ptr<sf::Sound>> activeSounds;
     
     // Sistema de transiciones
     TransitionManager transition;
