@@ -1,4 +1,4 @@
-# Proyecto: *Remoria*  
+# Proyecto: *Remoria~*  
 **Visual Novel creada en C++ con SFML**
 
 Este repositorio contiene el desarrollo de una novela visual centrada en una atmósfera nostálgica y melancólica. El proyecto busca recrear la sensación de un recuerdo fragmentado, usando gráficos simples, animaciones mínimas y una paleta suave inspirada en ilustraciones sobre papel.
@@ -16,15 +16,12 @@ Este proyecto se desarrolla con:
   - Window
   - System
   - Audio (música y efectos)
-
-Además, es probable que se incorporen de forma gradual las siguientes herramientas:
-
 - **Aseprite**
-  - Sprites semi-pixelart
+  - Sprites semi-pixelart y fondos
+- **Audacity**
+  - Edicion de musica y audio
 - **nlohmann/json**
   - Diálogos y estructura de escenas en formato .json
-
-*(Estas dependencias pueden cambiar o ampliarse a medida que avance el desarrollo...)*
 
 ## Dispocision de carpetas
 ```bash
@@ -105,7 +102,15 @@ Se añadio el IntroScreen y CreditsScreen. Estas nuevas funcionalidades daban vi
 
 Bug critico con los creditos y un bucle infinito de loop solucionado. Se añadio un icono al juego, ademas de mejoro el sistema de cargado de texturas al no usar punteros inexistentes. El cargado de .json ya esta disponible para el desarrollo de escenas y desde este punto se puede comenzar a trabajar en el juego en sí, pero siempre revisando el codigo.
 
-*(Siendo esta la ultima actualizacion disponible...)*
+-**build        v0.6+:**
+
+Se mejoro ligeramente el codigo, se añadio un goto de scenas sin la necesidad de choise, y un sistema para oculpar al personaje si es que se desea, una leve mejora a la version anterior y quizas la que se empiece a trabajar en el juego.
+
+***(Siendo esta la ultima actualizacion disponible...)***
+
+-**Beta     v0.7:**
+
+*En desarrollo... (18/12/2025)*
 
 ## Compilacion del juego
 
@@ -113,7 +118,7 @@ Puedes descargar el game.rar, y luego descomprimirlo para poder jugarlo. Se enco
 
 En caso que se desee compilar desde 0 el juego, el prodecimiento se explica en el siguiente docs:
 
-[![Google Docs](https://img.shields.io/badge/Google%20Docs-4285F4?style=flat&logo=google&logoColor=white)](https://docs.google.com/document/d/1U7nhNjDhPBOscAGJqNWPGV12pQJSWbbs4f7op4hos8U/edit?usp=sharing)
+[![Google Docs](https://img.shields.io/badge/Google%20Docs-4285F4?style=flat&logo=google&logoColor=white)](https://docs.google.com/document/d/1U7nhNjDhPBOscAGJqNWPGV12pQJSWbbs4f7op4hos8U/view?usp=sharing)
 
 ## Nota
 
