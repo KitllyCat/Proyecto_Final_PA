@@ -1,0 +1,67 @@
+{
+  "scene": "way_home_afternoon",
+  "bg": "assets/images/backgrounds/street_afternoon.png",
+  "music": "assets/audio/unknown_happy_memories.ogg",
+  "music_volume": 45,
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Salgo del colegio y el ruido queda atrás poco a poco...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mis pasos resuenan contra la vereda... El camino a casa es el mismo de siempre)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Recuerdo las palabras de la profesora Elena...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Recuerdo a Luna... Su forma tranquila de hablar, como si ya supiera algunas respuestas...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(¿Y si cambiar el camino también me cambiará el día?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(A la izquierda, la ruta directa. Diez minutos y estaré en casa...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(A la derecha, el desvío que pasa por el parque...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Nunca tomo ese camino. Siempre pensé que no valía la pena...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pero hoy… Bueno...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Vayamos por ahí...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 2.0
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_park_decision.json"
+    }
+  ]
+}

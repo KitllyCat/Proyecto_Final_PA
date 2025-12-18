@@ -1,0 +1,199 @@
+{
+  "scene": "park_morning",
+  "bg": "assets/images/backgrounds/secret_street.png",
+  "music": "assets/audio/setuniman_child.ogg",
+  "music_volume": 40,
+  "character": {
+    "frame1": "assets/images/characters/luna1.png",
+    "frame2": "assets/images/characters/luna2.png",
+    "fps": 4,
+    "x": 960,
+    "y": 520,
+    "voice": "assets/audio/voice_blip.wav",
+    "voice_volume": 60
+  },
+  "steps": [
+    { "type": "hide_character", "id": "main" },
+    {"type": "checkpoint"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Sigo al gato por el callejón, hasta que el espacio se abre frente a mí...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Ehhh... No vayas tan rapido gatito..."
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/meow.ogg",
+      "volume": 80
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/park.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Vaya... El parque... Hace tiempo que no pasaba por aquí a esta hora...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El aire es fresco, y el rocío aún descansa sobre el pasto...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Por cierto... donde está el gato...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bueno... tal parece que ya lo perdi de vista..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Me hubiese gustado acariciarlo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Entonces la ví...)"
+    },
+    { "type": "show_character", "id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(A lo lejos, entre los árboles...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Luna...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(La luz de la mañana cae sobre ella de una forma natural...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Su cabello se mueve suavemente con el viento... y por un momento, solo puedo admirar como su figura se complementaa con el fondo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(¿Dónde la conocí...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ahhh... Creo que es la hija de unos de los amigos de mis padres...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Con razón ya me sonaba a algo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Aunque no recuerdo cuándo fue la última vez que la miré así...)"
+    },
+    { "type": "hide_character", "id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Definitivamente necesito descanzar temprano... y evitar soñar cosas...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...raras...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(De pronto, un sonido me saca de mis pensamientos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mi reloj...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(7:57...!!!)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "¡Maldición...!"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Si sigo aquí, llegaré tarde...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Miro una última vez hacia el parque...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Luna ya no está a la vista...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Y el gato desaparecio...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Como si lo entendiera...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bueno... ire corriendo..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_school.json"
+    }
+  ]
+}

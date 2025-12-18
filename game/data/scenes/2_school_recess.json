@@ -1,0 +1,327 @@
+{
+  "scene": "school_recess",
+  "bg": "assets/images/backgrounds/s_ground.png",
+  "music": "assets/audio/setuniman_aperitif.ogg",
+  "music_volume": 50,
+  "character": {
+    "frame1": "assets/images/characters/luna1.png",
+    "frame2": "assets/images/characters/luna2.png",
+    "fps": 4,
+    "x": 980,
+    "y": 540,
+    "voice": "assets/audio/voice_blip.wav",
+    "voice_volume": 55
+  },
+  "steps": [
+    { "type": "hide_character","id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El timbre suena y el aula se vacía en segundos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(En el patio, el sol del mediodía calienta el cemento...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Los niños corren en todas direcciones: algunos juegan a la ronda, otros van a los columpios, otros comparten sus loncheras en pequeños grupos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Yo me quedo cerca de la pared, observando...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El caos organizado del recreo... Me gusta... jejeje)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Aquí, los problemas se reducen a quién tiene la pelota... o con quién vas a jugar...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "¿Por qué estás solo?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me doy la vuelta...)"
+    },
+    { "type": "show_character","id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Frente a mí hay una niña... Ella es... Hmmm...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Cabello negro largo...  ojos hermosos tan grandes que parecen absorber la luz...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(En una mano sostiene una manzana. En la otra, parece que lleva un libro con la cubierta gastada...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "No estoy solo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mi voz suena más a pregunta que a respuesta...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Claro que sí..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Todos están jugando o hablando... y tú solo estás aquí, mirando."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Como si fueras nuevo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Pero tú no eres nuevo. Llevas en esta escuela desde primero... al igual que yo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(La observo con más atención...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Hay algo en ella... una confianza tranquila, como si ya hubiera enfrentado esto...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Me llamo Luna."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Luna eh...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Como el nombre de una canción que sabía de niño...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Yo soy Kami."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Lo sé..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Te he visto antes..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Siempre te sientas en el mismo lugar durante el recreo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "De cierta manera... siempre solo."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Qué..? Pero yo no busco eso... Bueno...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Ehh... ¿Y tú...?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "¿Por qué no estás jugando con las otras niñas?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Luna mira hacia un grupo que salta la soga, tarareando una canción...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Prefiero leer."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ah... es lógico...)"
+    },
+
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "¿Te gustó la clase de la señora Elena?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Sí...supongo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Lo de las trepanaciones... es increíble..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Mi papá es médico..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Dice que incluso hoy, operar el cerebro sigue siendo una de las cosas más difíciles..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Esos Paracas debieron ser muy valientes..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "O muy desesperados..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "(*Se rie ligeramente...)"
+    },
+    { "type": "hide_character","id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Valientes... desesperados...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(¿No son, acaso, dos lados de la misma moneda?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "¿Tú crees que podemos cambiar cosas en nuestra cabeza...?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Sin cirugía... solo pensando diferente...."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Osea... ellos estaba mal, por eso quizas llegaban a ese punto, no...?"
+    },
+    { "type": "show_character","id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Luna me mira con atención...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Mi papá dice que el cerebro es como plástico..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Que puede cambiar de forma..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Que lo mismo pasa con los recuerdos... con las ideas... con lo que creemos que es posible..."
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/ring.ogg",
+      "volume": 40
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El timbre suena. Demasiado pronto...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Tenemos que volver."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Pero... si quieres..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Luna",
+      "text": "Podemos sentarnos juntos mañana... Para que no estes solo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No que ya estabamos sentados juntos...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Bueno, se lo dejare a mi yo de mañana...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Sí..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Me gustaría."
+    },
+    { "type": "hide_character","id": "main" },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 2.0
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_school_exit.json"
+    }
+  ]
+}

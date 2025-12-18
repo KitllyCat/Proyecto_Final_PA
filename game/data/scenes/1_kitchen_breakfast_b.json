@@ -1,0 +1,107 @@
+{
+  "scene": "kitchen_morning_confession",
+  "bg": "assets/images/backgrounds/kitchen_day.png",
+  "music": "assets/audio/Pufino_Harmony.ogg",
+  "music_volume": 45,
+  "character": {
+    "frame1": "assets/images/characters/mother1.png",
+    "frame2": "assets/images/characters/mother2.png",
+    "fps": 4,
+    "x": 960,
+    "y": 520,
+    "voice": "assets/audio/voice_blip.wav",
+    "voice_volume": 60
+  },
+  "steps": [
+    { "type": "hide_character","id": "main"},
+    {"type": "checkpoint"},
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "No... fue solo un sueño mamá..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Claro que se sintio algo raro, pero preferiria no decirlo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mi pecho se aprieta al decirlo en voz alta...)"
+    },
+    { "type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Oh..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Sabes... A veces, las personas sentimos el peso de cosas que todavía no han pasado..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Pero eso no significa que estés destinado a repetirlas..."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Sus palabras se quedan conmigo más de lo que esperaba...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Siempre tan inteligente mamá...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ah...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Qué? El reloj marca las 7:45...)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "Madre",
+      "text": "Creo que será mejor que salgas de una vez o llegarás tarde al colegio..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Si... tienes razón, voy saliendo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Te quiero mucho mamá <3"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Madre",
+      "text": "Yo tambien te quiero mi querido Kami... Cuídate..."
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/door_close.ogg",
+      "volume": 50
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_outside_house.json"
+    }
+  ]
+}

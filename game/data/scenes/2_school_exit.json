@@ -1,0 +1,124 @@
+{
+  "scene": "school_exit_afternoon",
+  "bg": "assets/images/backgrounds/classroom_day.png",
+  "music": "assets/audio/setuniman_aperitif.ogg",
+  "music_volume": 45,
+  "character": {
+        "frame1": "assets/images/characters/elena1.png",
+        "frame2": "assets/images/characters/elena2.png",
+        "fps": 4,
+        "x": 960,
+        "y": 520,
+        "voice": "assets/audio/voice_blip.wav",
+        "voice_volume": 60
+    },
+  "steps": [
+    { "type": "hide_character","id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Bien... de nuevo a clase...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/black.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Bueno... la clase continuó de manera normal...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Parece que Luna esta concentrada haciendo algo...)"
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/ring.ogg",
+      "volume": 40
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/classroom_afternoon.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Parece que ya es hora de salir...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Veo padres esperan en la entrada. Algunos niños corren hacia ellos, otros caminan en grupos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Yo salgo solo...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/school_exterior.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El sol de la tarde es tibio. No quema, solo acompaña)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pienso en la clase... En Paracas... En Luna...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Antes, todo esto habría pasado sin dejar rastro...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Y de paso me hubiera olvidado... como siempre...jeje)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 2.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_way_home.json"
+    }
+  ]
+}

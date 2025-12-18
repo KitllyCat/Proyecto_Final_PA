@@ -1,0 +1,71 @@
+{
+  "scene": "school_exterior",
+  "bg": "assets/images/backgrounds/school_exterior.png",
+  "music": "assets/audio/setuniman_child.ogg",
+  "music_volume": 45,
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ahhh.. Llego justo cuando ya va a ser hora... El gran edificio se alza frente a mí...)"
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/school_noise.ogg",
+      "volume": 40
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Niños corren por el patio. Ríen, discuten, viven. Esta energía... la había olvidado...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Tal parece que me ando olvidando todo hoy...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me aseguraré de dormir correctamente la proxima vez)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Quizas así mis neuronas aprendan a pensar desde temprano... jeje)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bueno... Entremos..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/black.png"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Entro al colegio... El olor del aula me golpea de lleno..)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Los salones siempre huelen asi...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Que mas da... Vamos..."
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_school_elena.json"
+    }
+  ]
+}

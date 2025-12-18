@@ -1,0 +1,203 @@
+{
+  "scene": "kitchen_morning",
+  "bg": "assets/images/backgrounds/kitchen_day.png",
+  "music": "assets/audio/Pufino_Harmony.ogg",
+  "character": {
+        "frame1": "assets/images/characters/mother1.png",
+        "frame2": "assets/images/characters/mother2.png",
+        "fps": 4,
+        "x": 960,
+        "y": 520,
+        "voice": "assets/audio/voice_blip.wav",
+        "voice_volume": 60
+    },
+  "steps": [
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/walking_on_wood.ogg",
+      "volume": 50
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El aroma a café recién hecho y pan tostado sube por las escaleras...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No puedo resistirme a ese aroma... Ahhh...)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Buenos días, dormilón... Hoy sí que te costó despertar..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Madre",
+      "text": "(*Se rie ligeramente...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Buenos días, mamá..."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Su voz es aguda, y algo infantil. Muy distinta a la que yo recordaba...)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Huevos revueltos con queso y jamón, justo como te gustan..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Tambien deje pan tostado por si deseas... Y algo de avena para tomar..."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Observo el plato... Esta escena me provoca una felicidad tan intensa...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Muchas gracias mamá... Que hice para merecer a alguien como tú...? Jejeje...)"
+    },
+    {"type": "show_character","id": "main"}, 
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "¿Estás bien, cariño?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Si...? ¿Pasó algo malo?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Bueno... No exactamente... Sino que tienes cara de haber soñado algo muy pesado..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Se me nota?)"
+    },
+    {
+      "type": "choice",
+      "choices": [
+        {
+          "text": "Contarle lo que sentí en el sueño...",
+          "flag": "dream_experiencie"
+        },
+        {
+          "text": "Decir que solo fue un sueño tonto...",
+          "goto": "data/scenes/1_kitchen_breakfast_b.json"
+        }
+      ]
+    },
+    {"type": "checkpoint"},
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Ahhh... Bueno, sí..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Fue un sueño algo extraño... Soñé como si fuera más grande... y que las cosas no habían salido bien..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Y también me dolia el cuerpo por algun motivo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Aveces los sueños nos muestran algunos de nuestros miedos..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "Pero recuerda... son solo sueños. Tú todavía tienes todo el tiempo del mundo para decidir qué quieres ser... Para equivocarte... Para empezar de nuevo si es necesario..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ehhh...? Qué quiso decir con eso...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(. . .)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Mamá, ¿Tú crees que podemos cambiar las cosas?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Madre",
+      "text": "A veces. Y muchas veces son las decisiones pequeñas las que más importan..."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "(Miro mi plato... Esas palabras.. Ugh... Necesito procesarlas...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Qué? El reloj marca las 7:45...)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "Madre",
+      "text": "Creo que será mejor que salgas de una vez o llegarás tarde al colegio..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Si... tienes razón, voy saliendo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Te quiero mucho mamá <3"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "Madre",
+      "text": "Yo tambien te quiero mi querido Kami... Cuídate..."
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/door_close.ogg",
+      "volume": 50
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_outside_house.json"
+    }
+  ]
+}

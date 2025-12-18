@@ -1,0 +1,164 @@
+{
+  "scene": "school_classroom_sleep",
+  "bg": "assets/images/backgrounds/classroom_day.png",
+  "music": "assets/audio/setuniman_aperitif.ogg",
+  "music_volume": 35,
+  "character": {
+    "frame1": "assets/images/characters/elena1.png",
+    "frame2": "assets/images/characters/elena2.png",
+    "fps": 4,
+    "x": 960,
+    "y": 520,
+    "voice": "assets/audio/voice_blip.wav",
+    "voice_volume": 60
+  },
+  "steps": [
+    { "type": "hide_character", "id": "main" },
+    {"type": "checkpoint"},
+    { "type": "hide_character", "id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Apoyo la cabeza sobre el pupitre... Solo un momentito...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Las voces alrededor se vuelven lejanas... como si alguien bajara el volumen del mundo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mis párpados pesan...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/black.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No sé cuánto tiempo pasó...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pero algo no se siente bien...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Estoy soñando...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(O al menos eso creo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "¿Hola...?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mi voz se pierde...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/classroom_afternoon.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Kami..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Kami, despierta..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Abro los ojos de golpe...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "¡Ehhh...!"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Si estás cansado, intenta dormir mejor en casa..."
+    },
+    { "type": "hide_character", "id": "main" },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Algunos compañeros se ríen en voz baja...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me froto la frente...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Vaya sueño... jejeje)"
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/ring.ogg",
+      "volume": 50
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Receso...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(A salir de aqui...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_school_recess.json"
+    }
+  ]
+}

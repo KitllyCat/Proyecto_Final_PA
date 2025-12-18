@@ -1,0 +1,160 @@
+{
+  "scene": "classroom_elena",
+  "bg": "assets/images/backgrounds/classroom_day.png",
+  "music": "assets/audio/setuniman_child.ogg",
+  "music_volume": 40,
+    "character": {
+        "frame1": "assets/images/characters/elena1.png",
+        "frame2": "assets/images/characters/elena2.png",
+        "fps": 4,
+        "x": 960,
+        "y": 520,
+        "voice": "assets/audio/voice_blip.wav",
+        "voice_volume": 60
+    },
+  "steps": [
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/black.png"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Veo el letrero de salón 5-B... Cuanto tiempo sin verte...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ahhh...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pero si tuve clases ayer...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/classroom_day.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Buenos días, Kami... Llegas justo a tiempo..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Buenos días Profesora..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Asiento y camino hasta mi asiento... Segunda fila, junto a la ventana)"
+    },
+{
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me encanta estar al lado del sol, pero esta situación no se pone bonita cuando es invierno...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Muy bien, clase... El día de hoy vamos a hablar sobre un tema muy interesante..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Algo que forma parte de nuestra historia..."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Hmmm... que podrá ser...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Quizás algun tema que cause revuelo? Quizás alguna guerra? Quizas...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Escucho murmullos a mi alrededor... Algunos niños se inclinan sobre sus pupitres, se miran entre ellos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Escucho risas bajas... Sillas moviéndose... Algo normal de cada día...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Miro por la ventana... Los árboles se mecen suavemente con el viento...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Ahhh..."
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Bien.. silencio... Daremos inicio a la clase..."
+    },
+    {"type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Por alguna razón, siento que este día será importante...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me acomodo en mi pupitre...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {"type": "checkpoint"},
+    {"type": "hide_character","id": "main"},
+    {
+      "type": "music",
+      "file": "assets/audio/chapter-setuniman_outro.ogg",
+      "volume": 70
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 2.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/chapter2.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_school_classroom.json"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "scene": "2_home_evening",
+  "bg": "assets/images/backgrounds/black.png",
+  "music": "assets/audio/Pufino_Sentimental.ogg",
+  "music_volume": 35,
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Por fin llegué a casa..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Dejo la mochila junto a la puerta y me dirijo a mi habitación...)"
+    },
+    {
+      "type": "choice",
+      "choices": [
+        {
+          "text": "Continuar...",
+          "require_flag": "dream_experiencie"
+        },
+        {
+          "text": "Continuar...",
+          "require_flag": "sleep_class",
+          "goto": "data/scenes/2_home_evening_b.json"
+        }
+      ]
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Hoy hice lo correcto... creo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mamá estaba tranquila... y su felicidad me hace feliz a mi tambien...como si nada hubiera pasado)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No fue un día perfecto, pero se siente bien)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Kami cierra sus ojos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "Aveces se piensa en lo simple que puede ser hacer lo correcto. No es una decisión grande ni heroica, solo son pequeños gestos: escuchar, detenerse, o prestar atención..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "Y aun así, aunque no siempre entiendas todo lo que está pasando, hiciste caso al tu corazón..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "Sigue asi..."
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/Ult_end.json"
+    }
+  ]
+}

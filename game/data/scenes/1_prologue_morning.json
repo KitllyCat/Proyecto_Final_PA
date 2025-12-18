@@ -1,0 +1,150 @@
+{
+  "scene": "kami_room_morning",
+  "bg": "assets/images/backgrounds/kami_bedroom.png",
+  "music": "assets/audio/unknown_a_sweet_amp_memorable.ogg",
+  "music_volume": 50,
+  "steps": [
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/birds_morning.ogg",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(La luz del sol entra por la ventana, calentando mi cobertor azul con un estampado simple)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Parpadee algo desorientado... Acaso ese techo me resulta familiar...?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Esas grietas cerca del escritorio, la mancha de humedad con forma de dragón)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Mmmm..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me siento en la cama... Mis pies descalzos tocan el suelo de madera...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Miro mis manos, son pequeñas e infantiles)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Un escalofrío me recorre en el cuerpo. No es miedo. Es como volver a una casa que creía perdida)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Espera... Esta es mi casa, no...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Ugh... Vaya sueño... no tengo ni idea que cosas pasaron por mi cabeza, pero ese..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Nahhh... Da igual..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Mejor preparemonos para las clases de hoy..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/bathroom.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/brush_teeth_up.ogg",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Jummm~..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Hmmmm~..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bien, ahora cambiémonos para ir el colegio..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Mañana será viernes, veré que puedo hacer el fin de semana..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/kami_bedroom.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Dónde deje mi uniforme...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": ". . ."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bien, creo que ya estoy. Ahora vayamos a la cocina..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_kitchen_breakfast.json"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "scene": "2_home_evening",
+  "bg": "assets/images/backgrounds/black.png",
+  "music": "assets/audio/Pufino_Sentimental.ogg",
+  "music_volume": 35,
+  "steps": [
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 3.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/chapter3.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 5
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 3.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/end.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 5
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "scene": "outside_house_morning",
+  "bg": "assets/images/backgrounds/house_day.png",
+  "music": "assets/audio/Pufino_Harmony.ogg",
+  "music_volume": 50,
+  "steps": [
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/breath_soft.ogg",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Salgo de la casa y el aire fresco de la mañana me golpea el rostro... Respiro hondo..)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El cielo está despejado, de un azul tan intenso que parece irreal. Todo se ve... tan vivo)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Siempre fue asi, no...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Que hermoso se ve el día de hoy..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Bueno, tampcoco es que tenga prisa... o por primera vez en mucho tiempo)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bueno, vayamos de una vez..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_street.json"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "scene": "street_morning",
+  "bg": "assets/images/backgrounds/street.png",
+  "music": "assets/audio/setuniman_child.ogg",
+  "music_volume": 45,
+    "character": {
+        "frame1": "assets/images/characters/cat1.png",
+        "frame2": "assets/images/characters/cat2.png",
+        "fps": 4,
+        "x": 960,
+        "y": 520,
+        "voice": "assets/audio/voice_blip.wav",
+        "voice_volume": 60
+    },
+  "steps": [
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Camino por la ruta de siempre... La calle está tranquila, algunas persianas de las casas siguen cerradas)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El señor Martínez esta regando sus plantas. Me saluda con la mano, y le devuelvo el saludo, sorprendido de recordarlo tan bien...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(..y que él tambien me recuerde...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Y entonces lo veo...)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/meow.ogg",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Un gato negro está sentado sobre un muro, mirándome fijamente... Esos ojos... Inconfundible...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Eres tú...? Sombra...?"
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/meow.ogg",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Pero mira que hermosa estás... Pensé que ya no estabas por aqui..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Se acerca, se frota contra mis piernas y ronronea. Luego se aleja hacia el callejón, mirándome una última vez...)"
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Recuerdo que unos vecinos dijeron que se perdio hace tiempo...)"
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/meow.ogg",
+      "volume": 80
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ehhh...? Acaso quiere que lo siga?)"
+    },
+    {
+      "type": "choice",
+      "choices": [
+        {
+          "text": "Seguir al Sombra...",
+          "flag": "cat_followed",
+          "goto": "data/scenes/1_street_b.json"
+        },
+        {
+          "text": "Continuar al colegio..."
+        }
+      ]
+    },
+    {"type": "checkpoint"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mi reloj marca las 7:55. No puedo llegar tarde...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Perdoname gatito...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Prometo traerte algo para ti la proxima vez...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Sigo caminando... Más lento esta vez... Observándolo todo como si fuera la primera vez)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(¿Por qué me estoy poniendo tan nostalgico?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No es como si esto tambien sea un sueño...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": "Bueno... parece que ya estoy cerca..."
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/1_school.json"
+    }
+  ]
+}

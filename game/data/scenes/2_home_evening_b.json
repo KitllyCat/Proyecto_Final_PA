@@ -1,0 +1,52 @@
+{
+  "scene": "2_home_evening_b",
+  "bg": "assets/images/backgrounds/black.png",
+  "music": "assets/audio/Pufino_Sentimental.ogg",
+  "music_volume": 35,
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Creo que quizas algo no encajó del todo hoy...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Tal vez debí pensar mejor algunas cosas...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No todo error se nota de inmediato... verdad...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Kami cierra sus ojos...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "Y así se pasa el tiempo... A veces las decisiones más importantes no son las que cambian el camino, sino las que ignoramos por ir con prisa..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "Quizás tengas alguna oportunidad de cambiar eso, y espero que estés mas atento cuando llegue."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ???",
+      "text": "Cuídate..."
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/Ult_end.json"
+    }
+  ]
+}

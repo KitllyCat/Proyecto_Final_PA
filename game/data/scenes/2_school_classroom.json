@@ -1,0 +1,218 @@
+{
+  "scene": "school_classroom",
+  "bg": "assets/images/backgrounds/classroom_day.png",
+  "music": "assets/audio/setuniman_aperitif.ogg",
+  "music_volume": 45,
+  "character": {
+    "frame1": "assets/images/characters/elena1.png",
+    "frame2": "assets/images/characters/elena2.png",
+    "fps": 4,
+    "x": 960,
+    "y": 520,
+    "voice": "assets/audio/voice_blip.wav",
+    "voice_volume": 60
+  },
+  "steps": [
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(El murmullo del aula se apaga poco a poco... El sonido de los cuadernos abriéndose llena el aire..)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me apoyo sobre mi pupitre, mirando el pizarrón. El plumon ya dejó marcas blancas, aunque todavía no hay nada escrito...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Cuanto tiempo llevo en este salón...?)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Muy bien, clase. El día de hoy vamos a comenzar con algo un poco diferente."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "¿Alguna vez se han preguntado cómo pensaban las personas hace miles de años?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Levanto un poco la mirada. Algunas cabezas asienten, otras simplemente esperan)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Hoy hablaremos de la cultura Pre-Inca, Paracas..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ohhh.... con que ese era el tema de hoy...)"
+    },
+    {"type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(La verdad no me molestaria omitirla... igual ya lo llevamos el año pasado...)"
+    },
+    {
+      "type": "choice",
+      "choices": [
+        {
+          "text": "Tomar una siesta en el pupitre...",
+          "flag": "sleep_class",
+          "goto": "data/scenes/2_school_classroom_b.json"
+        },
+        {
+          "text": "Continuar escuchando..."
+        }
+      ]
+    },
+    {"type": "checkpoint"},
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Paracas no es solo un nombre..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Era una civilización que vivió en lo que hoy es nuestro Perú hace más de dos mil años..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Vivían junto al mar, en un lugar desértico, pero supieron adaptarse y crear algo extraordinario..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "¿Alguien sabe por qué son especiales los Paracas...?"
+    },
+    {"type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " ",
+      "text": "(El compañero de mi costado levanto la mano...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Compañero",
+      "text": "¿Por sus momias, profesora?"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Sí, pero hay algo más..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Los Paracas practicaron algo que, incluso hoy, nos parece increíble: la trepanación craneana."
+    },
+    {"type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " ",
+      "text": "(???)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " ",
+      "text": "(Que dijo...?)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Ellos creían que muchas enfermedades venían de la mente..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Por eso practicaban algo llamado trepanación: abrían pequeños orificios en el cráneo para aliviar el dolor."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "No lo hacían por crueldad... Ellos creían que así liberaron a las personas de enfermedades, de espíritus malignos. Curar el cuerpo a través de la mente, y la mente a través del cuerpo.."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Siento un leve escalofrío recorrerme la espalda...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(¿Abrir la cabeza… para curar algo que no se ve...?)"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Puede sonar extraño ahora, pero muchas personas sobrevivían. Para ellos, mente y cuerpo eran una sola cosa."
+    },
+    { "type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No puedo dejar de pensar en eso... Que agallas tenian las personas para soportar algo asi...  )"
+    },
+    {"type": "show_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Mañana seguiremos con los Nazca..."
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Profesora Elena",
+      "text": "Quiero que investiguen sobre las líneas de Nazca..."
+    },
+    {"type": "hide_character","id": "main"},
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ya acabó...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Tal parece que escuchando se me fue la hora...)"
+    },
+    {
+      "type": "play_sfx",
+      "sound": "assets/audio/effects/ring.ogg",
+      "volume": 50
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Receso...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(A salir de aqui...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 2.0
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_school_recess.json"
+    }
+  ]
+}

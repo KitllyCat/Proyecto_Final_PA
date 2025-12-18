@@ -1,0 +1,170 @@
+{
+  "scene": "park_swing_evening",
+  "bg": "assets/images/backgrounds/park_game.png",
+  "music": "assets/audio/Pufino_Sentimental.ogg",
+  "music_volume": 40,
+  "steps": [
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Llego al parque...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No es grande. Solo un cuadrado... dos columpios, un tobogán y un banco bajo un árbol...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(A esta hora está casi vacío.. Solo una mujer con un cochecito, al otro extremo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me acerco a los columpios y dejo que la mochila caiga al suelo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me siento... El metal está frío bajo mis piernas...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me impulso suavemente. Adelante... atrás...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": " Kami",
+      "text": " Qué estoy haciendo exactanente...?"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Decido levantarme y seguir caminando...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/park_old.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Miro el cielo... Empieza a teñirse de tonos azulados...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pienso en los Paracas... mirando este mismo cielo —o uno muy parecido— hace dos mil años...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pienso en Luna... que mañana va a sentarse conmigo...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(O quizás se le olvide...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Pienso en mamá... que probablemente ya esté preocupada porque llegaré tarde...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Y aun así...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(No me siento perdido...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Me siento...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Presente...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Cierro los ojos con fuerza...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 1.5
+    },
+    {
+      "type": "change_bg",
+      "bg": "assets/images/backgrounds/park.png"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_from_black",
+      "duration": 1.5
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(???)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Acaso el parque cambió...?)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Ni modo... tocara seguir...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Mi viaje continúa...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(O continuará... Mejor dicho.. jejeje...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(...)"
+    },
+    {
+      "type": "dialogue",
+      "speaker": "",
+      "text": "(Aunque por esta vez... no tengo prisa por llegar a ninguna parte...)"
+    },
+    {
+      "type": "transition",
+      "effect": "fade_to_black",
+      "duration": 3.0
+    },
+    {
+      "type": "goto",
+      "scene": "data/scenes/2_home_evening.json"
+    }
+  ]
+}
