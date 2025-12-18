@@ -12,10 +12,28 @@
 #include "MainMenu.h"
 #include "IntroScreen.h"
 #include "CreditsScreen.h"
-
 using namespace std;
 using namespace sf;
 using json = nlohmann::json;
+
+bool isMaximized = false;
+Vector2u windowedSize(1920, 1080);
+
+void toggleWindowedFullscreen(RenderWindow& window, bool& isMaximized, const string& title, const Image& icon) {
+    if (!isMaximized) {
+        VideoMode desktop = VideoMode::getDesktopMode();
+        window.create(desktop,title,Style::Resize | Style::Close);
+        isMaximized = true;
+    } else {
+        window.create(VideoMode(windowedSize.x, windowedSize.y),title,Style::Resize | Style::Close);
+        isMaximized = false;
+    }
+    window.setFramerateLimit(60);
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    // Resolución lógica fija
+    View view(FloatRect(0.f, 0.f, 1920.f, 1080.f));
+    window.setView(view);
+}
 
 enum class GameState {
     Intro,
@@ -26,6 +44,7 @@ enum class GameState {
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);//Admite utf8 en consola
+    cout<<"INICIANDO GAME ENIGNE..."<<endl;
 	//Carga de json de config
     json config;
     ifstream cfg("data/game_config.json");
@@ -39,23 +58,15 @@ int main() {
         cfg.close();
     }
     //Renderizar la ventana
-    RenderWindow window(
-        VideoMode(
-            config["window"].value("width", 1920),
-            config["window"].value("height", 1080)
-        ),
-        config["window"].value("title", "Remoria"),
-        Style::Close
-    );
-    window.setFramerateLimit(60);
+    RenderWindow window(VideoMode(1920, 1080), config["window"].value("title", "Remoria~"), Style::Resize | Style::Close);
+	window.setFramerateLimit(60);
 	//Asignar icono del juego
 	Image icon;
-	if (!icon.loadFromFile("assets/images/icon.png")) {
-	    cout << "ERROR: No se pudo cargar el icono del juego\n";
-	} else {
-	    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr()
-	    );
-	}
+    if (!icon.loadFromFile("assets/images/icon.png")) {
+        cout << "[System ERROR]: No se pudo cargar el icono del juego\n";
+    } else {
+        window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    }
 	//Inicia el Core
     ResourceManager resources;
     SceneManager sceneManager(resources);
@@ -76,14 +87,22 @@ int main() {
     bool showingCredits = false;
     string sceneToLoad;
     int stepToLoad = 0;
-
     Clock clock;
+    cout<<"GAME ENIGNE INICIADO!!!"<<endl;
 	//Sfml abre la ventana en loop
     while (window.isOpen()) {
         Event ev; //declaracion de ev(para todo el enigne)
         while (window.pollEvent(ev)) {
-            if (ev.type == Event::Closed)
-                window.close();
+        	if (ev.type == Event::Closed){
+        		window.close();
+			}
+        	if (ev.type == Event::KeyPressed) {
+			    if (ev.key.code == Keyboard::F) {
+			        toggleWindowedFullscreen(window,isMaximized,config["window"].value("title", "Remoria~"),icon);
+			        sceneManager.setScreenSize(window.getSize());
+			        transition.setScreenSize(window.getSize());
+			    }
+			}
             if (state == GameState::Intro) {
                 intro.handleEvent(ev);
             } else if (state == GameState::Menu) {
