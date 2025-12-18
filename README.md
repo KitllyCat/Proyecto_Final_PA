@@ -104,11 +104,11 @@ Se añadio el IntroScreen y CreditsScreen. Estas nuevas funcionalidades daban vi
 
 Bug critico con los creditos y un bucle infinito de loop solucionado. Se añadio un icono al juego, ademas de mejoro el sistema de cargado de texturas al no usar punteros inexistentes. El cargado de .json ya esta disponible para el desarrollo de escenas y desde este punto se puede comenzar a trabajar en el juego en sí, pero siempre revisando el codigo.
 
--**build        v0.6+:**
+- **build        v0.6+:**
 
 Se mejoro ligeramente el codigo, se añadio un goto de scenas sin la necesidad de choise, y un sistema para oculpar al personaje si es que se desea, una leve mejora a la version anterior y quizas la que se empiece a trabajar en el juego.
 
--**Beta         v0.6.9+:**
+- **Beta         v0.6.9+:**
 
 Implementado el sistema de ecalar a ventana en caso que la resolución sea menor, pero afecta a los botones del juego y a los efectos. Y es jugable a modo de historia, Capitulo 1 y 2 añadidos.
 
