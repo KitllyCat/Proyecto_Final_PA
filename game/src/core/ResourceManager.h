@@ -16,7 +16,6 @@ private:
 
 public:
     ResourceManager() {}
-
     Texture& getTexture(const string& path);
     Font& getFont(const string& path);
     SoundBuffer& getSound(const string& path);

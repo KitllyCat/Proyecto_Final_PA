@@ -6,81 +6,65 @@
 #include <vector>
 #include "../core/ResourceManager.h"
 #include "VoiceBlip.h"
-
 using namespace std;
 using namespace sf;
 
 class DialogueBox {
 public:
+	//Constructor importante
     DialogueBox(ResourceManager& res,
                 const string& fontPath,
                 const Vector2f& size,
                 const Vector2f& position,
                 const string& bgTexturePath = "",
                 const string& voicePath = "assets/audio/voice_blip.wav");
-
-    // Setea un nuevo diálogo: hablante + texto. Reinicia el typewriter y paginado.
+    //Set a un nuevo dialogo
     void setDialogue(const string& speaker, const string& text);
-
-    // Avanza: si está escribiendo muestra todo; si ya terminó, pasa a siguiente página o cierra.
+    //Avanza si esta escribiendo
     void advance();
-
-    // Actualiza el efecto typewriter (dt en segundos)
+    //Actualiza el efecto typewriter
     void update(float dt);
-
-    // Dibuja la caja (solo si activa)
+    //Dibuja la caja
     void draw(RenderWindow& window);
-
-    // ¿Listo para que el jugador avance (ya terminó de escribir y espera input)?
+    //Listo para que el jugador avance?
     bool isWaitingForAdvance() const;
-
-    // ¿No hay diálogo en curso?
+    //No hay dialogo en curso?
     bool isIdle() const;
-
-    // Pasar eventos (teclado/ratón) para avanzar
+    //Pasar eventos para avanzar
     void handleEvent(const Event& ev);
-
-    // Ajustar velocidad de escritura (chars por segundo)
+    //Ajustar velocidad de escritura
     void setCharsPerSecond(float cps);
-
 private:
     ResourceManager& resources;
     Font* font;
-
-    // Background: sprite escalado (ideal) o fallback rectangle
+    //Background
     Sprite backgroundSprite;
     RectangleShape fallbackBackground;
     bool usingSpriteBackground;
-
-    // Layout
+    //Layout
     Vector2f boxSize;
     Vector2f boxPosition;
-
-    // Textos visibles
+    //Textos visibles
     Text speakerText;
     Text bodyText;
     Text hintText;
-
-    // Typewriter + paginado
-    string fullText;                    // texto original (UTF-8)
-    string currentShownText;            // texto de la página actual mostrado por typewriter (UTF-8)
-    float charTimer;                    // tiempo acumulado
-    float charInterval;                 // segundos por carácter
-    size_t charIndexInPage;             // índice dentro de la página actual (bytes)
-    bool finishedTyping;                // si terminó la página actual
+    //Typewriter + paginado
+    string fullText;
+    string currentShownText;
+    float charTimer;
+    float charInterval;
+    size_t charIndexInPage;
+    bool finishedTyping;
     bool active;
-
-    // Paginación
-    vector<string> pages;               // páginas en UTF-8
+    //Paginacion
+    vector<string> pages;
     size_t currentPageIndex;
-
-    // Voice blip: reproducir mientras haya typewriting activo
+    //Voice blip mientras haya typewriting activo
     VoiceBlip voiceBlip;
     string voiceFilePath;
-
-    // Helpers
-    void buildPages();                  // genera pages a partir de fullText y boxSize/font
-    float measureWidthUtf8(const string& utf8) const; // mide ancho en píxeles de una cadena UTF-8
+    //Helpers
+    void buildPages();
+    float measureWidthUtf8(const string& utf8) const;
     static wstring utf8_to_wstring(const string& str);
 };
 

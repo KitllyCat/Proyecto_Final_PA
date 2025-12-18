@@ -13,14 +13,12 @@
 #include "../graphics/SpriteAnimator.hpp"
 #include "../graphics/TransitionManager.h"
 #include "../save/SaveManager.h"
-
 using namespace std;
 using namespace sf;
 using json = nlohmann::json;
 
 typedef function<void(const string&)> MusicChangeCallback;
 
-// ÚNICO struct SceneStep con Choice ACTUALIZADA
 struct SceneStep {
     string type;
     string speaker;
@@ -32,7 +30,6 @@ struct SceneStep {
     string effect;
     float duration;
     string goto_scene;
-    // Choice con TODOS los campos necesarios
     struct Choice { 
         string text;
         string goto_scene;
@@ -40,7 +37,6 @@ struct SceneStep {
         string flag;
         string require_flag;
     };
-    
     vector<Choice> choices;
 };
 
@@ -48,14 +44,13 @@ class Scene {
 public:
     Scene();
     bool loadFromFile(const string& path, ResourceManager& res, int startIndex=0);
-
+    
     void setMusicChangeCallback(MusicChangeCallback callback);
     void setScreenSize(Vector2u size);
 
     void update(float dt);
     void handleEvent(const Event& ev);
     void draw(RenderWindow& window);
-
     bool isFinished() const;
     string getNextScene() const;
     void reset();
@@ -64,46 +59,37 @@ private:
     ResourceManager* resources;
     vector<SceneStep> steps;
     size_t currentIndex;
-
-    // Background
+    //Background
     Sprite bgSprite;
-
-    // Character (optional)
+    //Character
     Sprite characterSprite;
     unique_ptr<SpriteAnimator> characterAnimator;
     Vector2f characterPosition;
     bool characterVisible;    
     bool hasCharacter;
-
-    // Dialogue
+    //Dialogo
     unique_ptr<DialogueBox> dialogue;
-
-    // Control
+    //Control
     bool waitingChoice;
     bool finished;
     string nextScene;
     string basePath;
     string scenePath;
     int nextStartIndex;
-    
-    // Callback para música
+    //Llamar a musica
     MusicChangeCallback onMusicChange;
-    
-    // SFX
+    //Sfx
 	vector<std::unique_ptr<sf::Sound>> activeSounds;
-    
-    // Sistema de transiciones
+    //Sistema de transiciones
     TransitionManager transition;
     bool waitingTransition;
-
-    // Helpers
+    //Helpers
     void startStep(const SceneStep& s);
     void advanceStep();
     string dirname(const string& path);
-    
+    //Play musica
     void playSFX(const string& path, float volume = 100.f);
     void cleanupFinishedSounds();
-
     static bool pathLooksLikeAssets(const string& p);
 };
 

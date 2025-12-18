@@ -24,30 +24,21 @@ void IntroScreen::addLogo(const string& imagePath, float displayDuration, const 
     slide.textureLoaded = false;
     
     slides.push_back(slide);
-    
-    cout << "[IntroScreen] Logo añadido: " << imagePath 
-         << " (duración: " << displayDuration << "s)" << endl;
 }
 
 void IntroScreen::loadSlideTexture(LogoSlide& slide) {
-    if (slide.textureLoaded) return;
-    
+    if (slide.textureLoaded){return;}
     try {
         Texture& tex = resources.getTexture(slide.imagePath);
         slide.sprite.setTexture(tex);
-        
-        // Centrar el sprite en la pantalla
+        //Centrar el sprite
         FloatRect bounds = slide.sprite.getLocalBounds();
         slide.sprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
         slide.sprite.setPosition(screenSize.x / 2.0f, screenSize.y / 2.0f);
-        
         slide.textureLoaded = true;
-        
-        cout << "[IntroScreen] Textura cargada: " << slide.imagePath << endl;
     }
     catch (const exception& e) {
-        cerr << "[IntroScreen] ERROR al cargar: " << slide.imagePath 
-             << " - " << e.what() << endl;
+        cerr << "[IntroScreen] ERROR al cargar: " << slide.imagePath << " - " << e.what() << endl;
         slide.textureLoaded = false;
     }
 }
@@ -57,26 +48,20 @@ void IntroScreen::update(float dt) {
         finished = true;
         return;
     }
-
     if (currentSlideIndex >= slides.size()) {
         finished = true;
         return;
     }
-
     auto& currentSlide = slides[currentSlideIndex];
-    
-    // Cargar textura si no está cargada
+    //Cargar textura si no está cargada
     if (!currentSlide.textureLoaded) {
         loadSlideTexture(currentSlide);
     }
-
     timer += dt;
-
     switch (currentState) {
         case State::FADE_IN: {
-            // Fade in durante fadeDuration segundos
+            //Fade in durante fadeDuration en segundos
             float progress = timer / fadeDuration;
-            
             if (progress >= 1.0f) {
                 currentAlpha = 255;
                 currentState = State::DISPLAY;
@@ -86,22 +71,18 @@ void IntroScreen::update(float dt) {
             }
             break;
         }
-
         case State::DISPLAY: {
-            // Mostrar durante displayDuration segundos
+            //Mostrar durante displayDuration en segundos
             currentAlpha = 255;
-            
             if (timer >= currentSlide.displayDuration) {
                 currentState = State::FADE_OUT;
                 timer = 0.0f;
             }
             break;
         }
-
         case State::FADE_OUT: {
-            // Fade out durante fadeDuration segundos
+            //Fade out durante fadeDuration en segundos
             float progress = timer / fadeDuration;
-            
             if (progress >= 1.0f) {
                 currentAlpha = 0;
                 nextSlide();
@@ -110,30 +91,25 @@ void IntroScreen::update(float dt) {
             }
             break;
         }
-
         case State::FINISHED: {
             finished = true;
             break;
         }
     }
-
-    // Actualizar alpha del sprite
+    //Actualizar el alpha del sprite
     if (currentSlide.textureLoaded) {
         currentSlide.sprite.setColor(Color(255, 255, 255, currentAlpha));
     }
 }
 
 void IntroScreen::draw(RenderWindow& window) {
-    if (finished || slides.empty()) return;
-    if (currentSlideIndex >= slides.size()) return;
-
+    if (finished || slides.empty()){return;}
+    if (currentSlideIndex >= slides.size()){return;}
     auto& currentSlide = slides[currentSlideIndex];
-
-    // Dibujar background con el color del slide actual
+    //Dibujar background con el color del slide actual
     background.setFillColor(currentSlide.backgroundColor);
     window.draw(background);
-
-    // Dibujar sprite si está cargado
+    //Dibujar sprite si está cargado
     if (currentSlide.textureLoaded) {
         window.draw(currentSlide.sprite);
     }
@@ -144,7 +120,7 @@ bool IntroScreen::isFinished() const {
 }
 
 void IntroScreen::handleEvent(const Event& ev) {
-    // Permitir saltar con cualquier tecla, click o Escape
+    //Permitir saltar con cualquier tecla, click o Escape
     if (ev.type == Event::KeyPressed || 
         ev.type == Event::MouseButtonPressed) {
         skip();
@@ -153,23 +129,18 @@ void IntroScreen::handleEvent(const Event& ev) {
 
 void IntroScreen::nextSlide() {
     currentSlideIndex++;
-    
     if (currentSlideIndex >= slides.size()) {
         currentState = State::FINISHED;
         finished = true;
-        cout << "[IntroScreen] Intro completada" << endl;
     } else {
         currentState = State::FADE_IN;
         timer = 0.0f;
-        cout << "[IntroScreen] Siguiente slide: " << currentSlideIndex << endl;
     }
 }
 
 void IntroScreen::skip() {
     if (skipped) return;
-    
     skipped = true;
     finished = true;
-    
-    cout << "[IntroScreen] Intro saltada por el usuario" << endl;
+    cout << "[System] La Introduccion fue omitida!!!" << endl;
 }

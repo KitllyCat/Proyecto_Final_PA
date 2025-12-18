@@ -9,44 +9,33 @@ class TransitionManager {
 public:
     enum class Type {
         NONE,
-        FADE_TO_BLACK,  // Fade out (aparecer negro)
-        FADE_FROM_BLACK // Fade in (desaparecer negro)
+        FADE_TO_BLACK,  //Fade out 
+        FADE_FROM_BLACK //Fade in
     };
-
     TransitionManager();
-
-    // Iniciar una transición
+    //Iniciar una transicion
     void start(Type type, float duration = 1.0f);
-
-    // Actualizar la transición
+    //Actualizar la transicion
     void update(float dt);
-
-    // Dibujar la transición (llamar AL FINAL, después de todo lo demás)
+    //Dibujar la transicion
     void draw(RenderWindow& window);
-
-    // Verificar si la transición terminó
+    //Verificar si termino o esta activa
     bool isComplete() const;
-
-    // Verificar si hay una transición activa
     bool isActive() const;
-
-    // Forzar completar la transición
+    //Forzar completar la transicion
     void complete();
     void reset();
-
-    // Configurar tamaño de pantalla
+    //Configurar tamaño de pantalla
     void setScreenSize(Vector2u size);
-
+    
 private:
     Type currentType;
-    float duration;        // Duración total de la transición
-    float timer;           // Tiempo transcurrido
+    float duration;
+    float timer;
     bool active;
     bool completed;
-
-    RectangleShape fadeRect;  // Rectángulo negro para el fade
-
-    // Calcular el alpha actual basado en el progreso
+	//Rectangulo negro para el fade
+    RectangleShape fadeRect;
     Uint8 calculateAlpha() const;
 };
 

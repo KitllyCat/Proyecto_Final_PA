@@ -15,52 +15,48 @@ Scene::Scene() :
     waitingChoice(false), 
     finished(false), 
     onMusicChange(nullptr), 
-    waitingTransition(false) // ← NUEVO
+    waitingTransition(false)
 {
 }
 
-void Scene::setScreenSize(Vector2u size)
-{
+void Scene::setScreenSize(Vector2u size){
     transition.setScreenSize(size);
 }
 
-void Scene::setMusicChangeCallback(MusicChangeCallback callback)
-{
+void Scene::setMusicChangeCallback(MusicChangeCallback callback){
     onMusicChange = callback;
 }
 
-string Scene::dirname(const string& path)
-{
+string Scene::dirname(const string& path){
     size_t p = path.find_last_of("/\\");
-    if (p == string::npos) return ".";
+    if (p == string::npos){
+    	return ".";	
+	}
     return path.substr(0, p);
 }
 
-bool Scene::pathLooksLikeAssets(const string& p)
-{
-    if (p.size() < 7) return false;
-    
+bool Scene::pathLooksLikeAssets(const string& p){
+    if (p.size() < 7){
+    	return false;
+	}
     string start = p.substr(0, 7);
-    for (auto& c : start) c = tolower(c);
+    for (auto& c : start){
+    	c = tolower(c);
+	}
     return start == "assets/";
 }
 
-bool Scene::loadFromFile(const string& path, ResourceManager& res, int startIndex)
-{
+bool Scene::loadFromFile(const string& path, ResourceManager& res, int startIndex){
     resources = &res;
     scenePath = path;
     characterVisible = true;
-    
     ifstream f(path, ios::binary);
-    if (!f.is_open())
-    {
-        cout << "Scene: no se pudo abrir " << path << endl;
+    if (!f.is_open()){
+        cout << "[System] No se pudo abrir " << path << endl;
         return false;
     }
-    
     string content((istreambuf_iterator<char>(f)), istreambuf_iterator<char>());
     f.close();
-    
     json j = json::parse(content);
     basePath = dirname(path);
     
@@ -69,19 +65,14 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
     waitingChoice = false;
     finished = false;
     nextScene.clear();
-    
-    if (j.contains("bg"))
-    {
+    if (j.contains("bg")){
         string bg = j["bg"];
         string full = pathLooksLikeAssets(bg) ? bg : basePath + "/" + bg;
         bgSprite.setTexture(resources->getTexture(full));
     }
-    
     hasCharacter = false;
     characterAnimator.reset();
-    
-    if (j.contains("character"))
-    {
+    if (j.contains("character")){
         auto c = j["character"];
         string f1 = c.value("frame1", "");
         string f2 = c.value("frame2", "");
@@ -89,14 +80,10 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
         float x = c.value("x", characterPosition.x);
         float y = c.value("y", characterPosition.y);
         characterPosition = { x, y };
-        
-        if (!f1.empty() && !f2.empty())
-        {
+        if (!f1.empty() && !f2.empty()){
             string p1 = pathLooksLikeAssets(f1) ? f1 : basePath + "/" + f1;
             string p2 = pathLooksLikeAssets(f2) ? f2 : basePath + "/" + f2;
-            
-            try
-            {
+            try{
                 Texture& t1 = resources->getTexture(p1);
                 Texture& t2 = resources->getTexture(p2);
                 
@@ -112,20 +99,15 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
                 characterAnimator->play();
                 hasCharacter = true;
             }
-            catch (...)
-            {
+            catch (...){
                 hasCharacter = false;
             }
         }
     }
-    
     json arr = j.contains("steps") ? j["steps"] : j["sequence"];
-    
-    for (auto& item : arr)
-    {
+    for (auto& item : arr){
         SceneStep s;
         s.type = item.value("type", "dialogue");
-        
         if (s.type == "goto") {
 		    if (item.contains("scene")) {
 		        s.goto_scene = item["scene"].get<string>();
@@ -135,142 +117,89 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
 		        s.goto_scene = "";
 		    }
 		}
-        
-        if (s.type == "dialogue")
-        {
+        if (s.type == "dialogue") {
             s.speaker = item.value("speaker", "");
             s.text = item.value("text", "");
-            
-            if (item.contains("sfx"))
-            {
+            if (item.contains("sfx")){
                 s.sfx_path = item.value("sfx", "");
                 s.sfx_volume = item.value("sfx_volume", 100.0f);
             }
-        }
-        else if (s.type == "change_bg")
-        {
+        } else if (s.type == "change_bg") {
             s.bg_path = item.value("bg", "");
             if (item.contains("music"))
             {
                 s.music_path = item.value("music", "");
             }
-        }
-        else if (s.type == "goto")
-		{
+        } else if (s.type == "goto") {
 		    s.goto_scene = item.value("scene", "");
 		    if (s.goto_scene.empty()) {
-		        cerr << "[Scene] ERROR: goto sin 'scene'" << endl;
+		        cerr << "[System] ERROR: goto sin 'scene'" << endl;
 		    }
-		}
-        else if (s.type == "choice")
-        {
-            if (!item.contains("choices") || !item["choices"].is_array())
-            {
-                cerr << "[Scene] ERROR: 'choice' step debe tener array 'choices'" << endl;
+		} else if (s.type == "choice") {
+            if (!item.contains("choices") || !item["choices"].is_array()){
+                cerr << "[System] ERROR: 'choice' step debe tener array 'choices'" << endl;
                 continue;
             }
-            
-            for (auto& c : item["choices"])
-            {
+            for (auto& c : item["choices"]){
                 SceneStep::Choice ch;
-                
-                // Texto de la opción (obligatorio)
+                //Texto de la opcion
                 ch.text = c.value("text", "");
-                
-                // goto_scene: Cambiar a otra escena (opcional)
-                if (c.contains("goto"))
-                {
+                //Cambiar a otra escena
+                if (c.contains("goto")){
                     ch.goto_scene = c["goto"].get<string>();
-                }
-                else if (c.contains("next"))
-                {
+                } else if (c.contains("next")){
                     ch.goto_scene = c["next"].get<string>();
-                }
-                else
-                {
+                }else{
                     ch.goto_scene = "";
                 }
-                
-                // goto_step: Saltar a un step específico en esta escena (opcional)
-                if (c.contains("goto_step"))
-                {
-                    try
-                    {
+                //Saltar a un step especifico en esta escena
+                if (c.contains("goto_step")){
+                    try{
                         ch.goto_step = c["goto_step"].get<int>();
-                    }
-                    catch (...)
-                    {
+                    }catch (...){
                         ch.goto_step = -1;
                     }
-                }
-                else
-                {
+                }else{
                     ch.goto_step = -1;
                 }
-                
-                // flag: Flag a guardar cuando se elige (opcional)
-                if (c.contains("flag"))
-                {
+                //Flag a guardar cuando se elige
+                if (c.contains("flag")){
                     ch.flag = c["flag"].get<string>();
-                }
-                else
-                {
+                }else{
                     ch.flag = "";
                 }
-                
-                // require_flag: Flag necesario para que aparezca (opcional)
-                if (c.contains("require_flag"))
-                {
+                //Flag necesario para que aparezca
+                if (c.contains("require_flag")){
                     ch.require_flag = c["require_flag"].get<string>();
-                }
-                else
-                {
+                }else{
                     ch.require_flag = "";
                 }
-                
                 s.choices.push_back(ch);
-                
-                // Log para debugging
-                cout << "[Scene] Choice: '" << ch.text << "'";
-                if (!ch.goto_scene.empty())
-                {
+                if (!ch.goto_scene.empty()){
                     cout << " -> escena: " << ch.goto_scene;
-                }
-                else if (ch.goto_step >= 0)
-                {
+                }else if (ch.goto_step >= 0){
                     cout << " -> step: " << ch.goto_step;
                 }
-                if (!ch.flag.empty())
-                {
+                if (!ch.flag.empty()){
                     cout << " (flag: " << ch.flag << ")";
                 }
-                if (!ch.require_flag.empty())
-                {
+                if (!ch.require_flag.empty()){
                     cout << " (requiere: " << ch.require_flag << ")";
                 }
                 cout << endl;
             }
-        }
-        else if (s.type == "play_sfx")
-        {
+        } else if (s.type == "play_sfx"){
             s.sfx_path = item.value("sound", "");
-            if (s.sfx_path.empty())
-            {
+            if (s.sfx_path.empty()){
                 s.sfx_path = item.value("sfx", "");
             }
             s.sfx_volume = item.value("volume", 100.0f);
-        }
-        else if (s.type == "transition")
-        {
+        } else if (s.type == "transition"){
             s.effect = item.value("effect", "fade");
             s.duration = item.value("duration", 1.0f);
-            cout << "[Scene] transition: " << s.effect << " (" << s.duration << "s)" << endl;
         }
-        // checkpoint no necesita datos
-        
         steps.push_back(s);
     }
-    
     dialogue = make_unique<DialogueBox>(
         *resources,
         "assets/fonts/default.ttf",
@@ -280,359 +209,252 @@ bool Scene::loadFromFile(const string& path, ResourceManager& res, int startInde
     );
     
     currentIndex = startIndex;
-    if (currentIndex < steps.size())
-        startStep(steps[currentIndex]);
-    else
-        finished = true;
-    
+    if (currentIndex < steps.size()){
+    	startStep(steps[currentIndex]);
+	}else{
+		finished = true;
+	}
     return true;
 }
 
-void Scene::startStep(const SceneStep& s)
-{
-    // Limpiar sonidos terminados
+void Scene::startStep(const SceneStep& s){
+    //Limpiar sonidos terminados
     cleanupFinishedSounds();
-    
-    if (s.type == "hide_character")
-    {
+    if (s.type == "hide_character"){
         characterVisible = false;
         advanceStep();
         return;
     }
-    
-    if (s.type == "show_character")
-    {
+    if (s.type == "show_character"){
         characterVisible = true;
         advanceStep();
         return;
     }
-    
-    if (s.type == "checkpoint")
-    {
+    if (s.type == "checkpoint"){
         string id = scenePath.substr(scenePath.find_last_of("/\\") + 1);
         id = id.substr(0, id.find(".json"));
         SaveManager::getInstance().save(id, currentIndex);
         advanceStep();
         return;
     }
-    
-    if (s.type == "goto") {
+    if (s.type == "goto"){
 	    if (s.goto_scene.empty()) {
 	        cerr << "[Scene] goto sin escena válida" << endl;
 	        nextScene = s.goto_scene;
 	        finished = true;
 	        return;
 	    }
-	
-	    cout << "[Scene] → Cambio automático a escena: " << s.goto_scene << endl;
 	    nextScene = s.goto_scene;
 	    finished = true;
 	    return;
 	}
     
-    if (s.type == "dialogue")
-    {
+    if (s.type == "dialogue"){
         dialogue->setDialogue(s.speaker, s.text);
-        if (!s.sfx_path.empty())
-        {
+        if (!s.sfx_path.empty()){
             playSFX(s.sfx_path, s.sfx_volume);
         }
-    }
-    else if (s.type == "change_bg")
-    {
+    }else if (s.type == "change_bg"){
         string full = pathLooksLikeAssets(s.bg_path) ? s.bg_path : basePath + "/" + s.bg_path;
         bgSprite.setTexture(resources->getTexture(full));
-        
-        if (!s.music_path.empty() && onMusicChange)
-        {
+        if (!s.music_path.empty() && onMusicChange){
             onMusicChange(s.music_path);
         }
         advanceStep();
-    }
-    else if (s.type == "play_sfx")
-    {
-        if (!s.sfx_path.empty())
-        {
+    }else if (s.type == "play_sfx"){
+        if (!s.sfx_path.empty()){
             playSFX(s.sfx_path, s.sfx_volume);
         }
         advanceStep();
-    }
-    // Manejar transiciones
-    else if (s.type == "transition")
-    {
-        cout << "[Scene] Iniciando transición: " << s.effect << endl;
-        
-        if (s.effect == "fade" || s.effect == "fade_to_black")
-        {
+    }else if (s.type == "transition"){
+        if (s.effect == "fade" || s.effect == "fade_to_black"){
             transition.start(TransitionManager::Type::FADE_TO_BLACK, s.duration);
             waitingTransition = true;
-        }
-        else if (s.effect == "fade_from_black")
-        {
+        }else if (s.effect == "fade_from_black"){
             transition.start(TransitionManager::Type::FADE_FROM_BLACK, s.duration);
             waitingTransition = true;
-        }
-        else
-        {
-            cout << "[Scene] Efecto de transición desconocido: " << s.effect << endl;
+        }else{
+            cout << "[System] Efecto de transición desconocido: " << s.effect << endl;
             advanceStep();
         }
-    }
-    else if (s.type == "choice")
-    {
+    }else if (s.type == "choice"){
         waitingChoice = true;
-        
-        // NUEVO: Filtrar choices según flags requeridos
+        //Filtrar choices segun flags
         vector<SceneStep::Choice> availableChoices;
-        
-        for (const auto& choice : s.choices)
-        {
-            // Si requiere un flag, verificar si existe
-            if (!choice.require_flag.empty())
-            {
-                if (!SaveManager::getInstance().hasFlag(choice.require_flag))
-                {
-                    cout << "[Scene] Choice '" << choice.text << "' oculta (falta flag: " << choice.require_flag << ")" << endl;
-                    continue; // Saltar esta opción
+        for (const auto& choice : s.choices){
+            //Si pide flag, verificar si existe
+            if (!choice.require_flag.empty()){
+                if (!SaveManager::getInstance().hasFlag(choice.require_flag)){
+                    cout << "[System] Choice '" << choice.text << "' oculta (falta flag: " << choice.require_flag << ")" << endl;
+                    continue;
                 }
             }
             availableChoices.push_back(choice);
         }
-        
-        // Verificar que haya al menos una opción disponible
-        if (availableChoices.empty())
-        {
-            cerr << "[Scene] ERROR: Todas las choices están bloqueadas por flags" << endl;
-            // Fallback: avanzar al siguiente step
+        //Verificar que haya  una opcion disponible
+        if (availableChoices.empty()){
+            cerr << "[System] ERROR: Todas las choices están bloqueadas por flags" << endl;
+            //Avanzar al siguiente step
             waitingChoice = false;
             advanceStep();
             return;
         }
-        
-        // Construir texto con choices disponibles (numeradas desde 1)
+        //Construir texto con choices disponibles
         string text;
-        for (size_t i = 0; i < availableChoices.size(); ++i)
-        {
+        for (size_t i = 0; i < availableChoices.size(); ++i){
             text += to_string(i + 1) + ". " + availableChoices[i].text + "\n";
         }
-        
-        // Guardar temporalmente las choices disponibles
-        // (sobrescribir el vector original para este step)
+        //Guardar temporalmente las choices
         steps[currentIndex].choices = availableChoices;
         dialogue->setDialogue("Elige", text);
     }
 }
 
-void Scene::advanceStep()
-{
-    if (finished)
-        return;
-
-    if (++currentIndex < steps.size())
-        startStep(steps[currentIndex]);
-    else
-        finished = true;
+void Scene::advanceStep(){
+    if (finished){
+    	return;
+	}
+    if (++currentIndex < steps.size()){
+    	startStep(steps[currentIndex]);
+	}else{
+		finished = true;
+	} 
 }
 
-void Scene::update(float dt)
-{
-	 if (finished)
-        return;
-    // Limpiar sonidos periódicamente
+void Scene::update(float dt){
+	if (finished){return;}
+    //Limpiar sonidos
     static float cleanupTimer = 0.0f;
     cleanupTimer += dt;
-    
-    if (cleanupTimer >= 0.5f)
-    {
+    if (cleanupTimer >= 0.5f){
         cleanupFinishedSounds();
         cleanupTimer = 0.0f;
     }
-    
-    // ✅ NUEVO: Actualizar transición activa
-    if (waitingTransition)
-    {
+    //Actualizar transicion activa
+    if (waitingTransition){
         transition.update(dt);
-        
-        // Si la transición terminó, avanzar al siguiente step
-        if (transition.isComplete())
-        {
-            cout << "[Scene] Transición completada" << endl;
+        if (transition.isComplete()){
             waitingTransition = false;
             transition.reset();
             advanceStep();
         }
-        
-        // Mientras hay transición, no actualizar diálogos ni personajes
         return;
-    }
-    
-    // Actualizar diálogos y animaciones (solo si no hay transición)
-    if (dialogue) dialogue->update(dt);
-    if (hasCharacter && characterAnimator) characterAnimator->update(dt);
+    } 
+    if (dialogue){
+    	dialogue->update(dt);
+	}
+    if (hasCharacter && characterAnimator){
+    	characterAnimator->update(dt);
+	}
 }
 
-void Scene::handleEvent(const Event& ev)
-{
-    if (finished)
-    	return;
-	// NUEVO: No procesar eventos durante transiciones
-    if (waitingTransition)
-    {
-        // Opcionalmente, permitir saltar la transición con Escape
-        if (ev.type == Event::KeyPressed && ev.key.code == Keyboard::Escape)
-        {
-            cout << "[Scene] Transición saltada por usuario" << endl;
+void Scene::handleEvent(const Event& ev){
+    if (finished){return;}
+	//No procesar eventos durante transiciones
+    if (waitingTransition){
+        if (ev.type == Event::KeyPressed && ev.key.code == Keyboard::Escape){
+            cout << "[System] Transición saltada..." << endl;
             transition.complete();
         }
         return;
     }
-    
-    // Resto del código de handleEvent (sin cambios)
-    if (waitingChoice)
-    {
-        if (ev.type == Event::KeyPressed)
-        {
+    if (waitingChoice){
+        if (ev.type == Event::KeyPressed){
             int choiceIndex = -1;
-            
-            // Soportar teclas numéricas del teclado principal
-            if (ev.key.code >= Keyboard::Num1 && ev.key.code <= Keyboard::Num9)
-            {
+            //Soportar teclas numericas y del numpad
+            if (ev.key.code >= Keyboard::Num1 && ev.key.code <= Keyboard::Num9){
                 choiceIndex = ev.key.code - Keyboard::Num1;
-            }
-            // Soportar teclas del numpad
-            else if (ev.key.code >= Keyboard::Numpad1 && ev.key.code <= Keyboard::Numpad9)
-            {
+            }else if (ev.key.code >= Keyboard::Numpad1 && ev.key.code <= Keyboard::Numpad9){
                 choiceIndex = ev.key.code - Keyboard::Numpad1;
             }
-            
-            // Validar que la opción existe
-            if (choiceIndex >= 0 && choiceIndex < (int)steps[currentIndex].choices.size())
-            {
+            //Validar que la opcion existe
+            if (choiceIndex >= 0 && choiceIndex < (int)steps[currentIndex].choices.size()){
                 const auto& chosen = steps[currentIndex].choices[choiceIndex];
-                cout << "[Scene] ✓ Opción " << (choiceIndex + 1) << " seleccionada: " << chosen.text << endl;
-                
-                // NUEVO: Guardar flag si está definido
-                if (!chosen.flag.empty())
-                {
+                //Guardar flag si esta definido
+                if (!chosen.flag.empty()){
                     SaveManager::getInstance().setFlag(chosen.flag, true);
-                    cout << "[Scene] Flag guardado: " << chosen.flag << endl;
+                    cout << "[System] Flag guardado: " << chosen.flag << endl;
                 }
-                
-                // NUEVO: Decidir si cambiar de escena o hacer branching interno
-                if (!chosen.goto_scene.empty())
-                {
-                    // Cambiar a otra escena
-                    cout << "[Scene] → Cambiar a escena: " << chosen.goto_scene << endl;
+                //Decidir si cambiar de escena o hacer branching interno
+                if (!chosen.goto_scene.empty()){
                     nextScene = chosen.goto_scene;
                     waitingChoice = false;
                     finished = true;
-                }
-                else if (chosen.goto_step >= 0)
-                {
-                    // Saltar a un step específico (branching interno)
-                    cout << "[Scene] → Saltar a step: " << chosen.goto_step << endl;
+                }else if (chosen.goto_step >= 0){
                     currentIndex = chosen.goto_step;
                     waitingChoice = false;
-                    
-                    if (currentIndex < steps.size())
-                    {
+                    if (currentIndex < steps.size()){
                         startStep(steps[currentIndex]);
-                    }
-                    else
-                    {
-                        cerr << "[Scene] ERROR: goto_step fuera de rango: " << chosen.goto_step << endl;
+                    }else{
+                        cerr << "[System] ERROR: goto_step fuera de rango: " << chosen.goto_step << endl;
                         finished = true;
                     }
-                }
-                else
-                {
-                    // No hay goto_scene ni goto_step: continuar al siguiente step
-                    cout << "[Scene] → Continuar en esta escena" << endl;
+                }else{
                     waitingChoice = false;
                     advanceStep();
                 }
-            }
-            else if (choiceIndex >= (int)steps[currentIndex].choices.size())
-            {
-                // Tecla numérica válida pero fuera de rango
-                cout << "[Scene] ✗ Opción " << (choiceIndex + 1) << " no existe. "
-                     << "Opciones disponibles: 1-" << steps[currentIndex].choices.size() << endl;
+            }else if (choiceIndex >= (int)steps[currentIndex].choices.size()){
+                // Tecla numerica valida pero fuera de rango
+                cout << "[System] La opción " << (choiceIndex + 1) << " no existe. Opciones disponibles: 1-" << steps[currentIndex].choices.size() << endl;
             }
         }
-        return; // No procesar otros eventos durante choices
+        return;
     }
-    
-    if (dialogue)
-    {
+    if (dialogue){
         dialogue->handleEvent(ev);
     }
-    
-    if (dialogue && dialogue->isIdle() && !finished && !waitingChoice)
-    {
+    if (dialogue && dialogue->isIdle() && !finished && !waitingChoice){
         advanceStep();
     }
 }
 
-void Scene::draw(RenderWindow& window)
-{
-    if (finished && nextScene.empty())
-        return;
-
+void Scene::draw(RenderWindow& window){
+    if (finished && nextScene.empty()){return;}
     window.draw(bgSprite);
-
-    if (hasCharacter && characterVisible)
-        window.draw(characterSprite);
-
-    if (dialogue)
-        dialogue->draw(window);
-
-    if (waitingTransition)
-        transition.draw(window);
+    if (hasCharacter && characterVisible){
+    	window.draw(characterSprite);
+	}
+    if (dialogue){
+    	dialogue->draw(window);
+	}
+    if (waitingTransition){
+    	transition.draw(window);
+	}   
 }
 
-bool Scene::isFinished() const
-{
+bool Scene::isFinished() const{
     return finished;
 }
 
-string Scene::getNextScene() const
-{
+string Scene::getNextScene() const{
     return nextScene;
 }
 
-void Scene::playSFX(const string& path, float volume)
-{
-    if (!resources) return;
-
-    try
-    {
+void Scene::playSFX(const string& path, float volume){
+    if (!resources){return;	}
+    try{
         string fullPath = pathLooksLikeAssets(path)
             ? path
             : basePath + "/" + path;
-
         sf::SoundBuffer& buffer = resources->getSound(fullPath);
-
         auto sound = std::make_unique<sf::Sound>();
         sound->setBuffer(buffer);
         sound->setVolume(volume);
         sound->play();
-
         activeSounds.push_back(std::move(sound));
     }
-    catch (const std::exception& e)
-    {
-        cerr << "[Scene ERROR] SFX: " << e.what() << endl;
+    catch (const std::exception& e){
+        cerr << "[System] SFX: " << e.what() << endl;
     }
 }
 
-void Scene::cleanupFinishedSounds()
-{
+void Scene::cleanupFinishedSounds(){
     auto it = activeSounds.begin();
-    while (it != activeSounds.end())
-    {
-        if ((*it)->getStatus() == sf::Sound::Stopped)
-            it = activeSounds.erase(it);
-        else
-            ++it;
+    while (it != activeSounds.end()){
+        if ((*it)->getStatus() == sf::Sound::Stopped){
+        	it = activeSounds.erase(it);
+		}else{
+			++it;
+		} 
     }
 }

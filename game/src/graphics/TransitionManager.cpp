@@ -8,9 +8,9 @@ TransitionManager::TransitionManager()
   active(false),
   completed(false)
 {
-    // Configurar el rectángulo negro
-    fadeRect.setFillColor(Color(0, 0, 0, 0));  // Negro transparente inicial
-    fadeRect.setSize(Vector2f(1920, 1080));    // Tamaño por defecto
+    //Configurar el rectángulo negro
+    fadeRect.setFillColor(Color(0, 0, 0, 0));
+    fadeRect.setSize(Vector2f(1920, 1080));
     fadeRect.setPosition(0, 0);
 }
 
@@ -24,38 +24,28 @@ void TransitionManager::start(Type type, float dur) {
         completed = true;
         return;
     }
-
     currentType = type;
     duration = dur;
     timer = 0.0f;
     active = true;
     completed = false;
-
-    cout << "[Transition] Iniciando... "<< endl;
 }
 
 void TransitionManager::update(float dt) {
-    if (!active || completed) return;
-
+    if (!active || completed){return;}
     timer += dt;
-
     if (timer >= duration) {
         timer = duration;
         completed = true;
         active = false;
-        
-        cout << "[Transition] Completada" << endl;
     }
-
-    // Actualizar el alpha del rectángulo
+    //Actualizar el alpha del rectangulo
     Uint8 alpha = calculateAlpha();
     fadeRect.setFillColor(Color(0, 0, 0, alpha));
 }
 
 void TransitionManager::draw(RenderWindow& window) {
-    if (!active && !completed) return;
-    
-    // Si está activa o recién completada, dibujar
+    if (!active && !completed){return;}
     if (active || (completed && currentType == Type::FADE_TO_BLACK)) {
         window.draw(fadeRect);
     }
@@ -70,13 +60,11 @@ bool TransitionManager::isActive() const {
 }
 
 void TransitionManager::complete() {
-    if (!active) return;
-    
+    if (!active){return;}
     timer = duration;
     completed = true;
     active = false;
-    
-    // Configurar alpha final
+    //Configurar alpha final
     Uint8 finalAlpha = (currentType == Type::FADE_TO_BLACK) ? 255 : 0;
     fadeRect.setFillColor(Color(0, 0, 0, finalAlpha));
 }
@@ -87,22 +75,17 @@ void TransitionManager::reset() {
     completed = false;
     timer = 0.0f;
     fadeRect.setFillColor(Color(0, 0, 0, 0));
-    cout << "[Transition] Reset a transparente" << endl;
 }
 
 Uint8 TransitionManager::calculateAlpha() const {
-    if (duration <= 0.0f) return 0;
-
-    float progress = timer / duration;  // 0.0 a 1.0
-
+    if (duration <= 0.0f){return 0;} //crash
+    float progress = timer / duration;
     if (currentType == Type::FADE_TO_BLACK) {
-        // De transparente (0) a opaco (255)
+        //De transparente (0) a opaco (255)
         return static_cast<Uint8>(progress * 255.0f);
-    } 
-    else if (currentType == Type::FADE_FROM_BLACK) {
-        // De opaco (255) a transparente (0)
+    } else if (currentType == Type::FADE_FROM_BLACK) {
+        //De opaco (255) a transparente (0)
         return static_cast<Uint8>((1.0f - progress) * 255.0f);
     }
-
     return 0;
 }

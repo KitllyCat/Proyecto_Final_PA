@@ -13,19 +13,15 @@ class IntroScreen {
 public:
     IntroScreen(ResourceManager& resources, Vector2u windowSize);
 
-    // Actualizar la intro
+    //Actualizar la intro
     void update(float dt);
-
-    // Dibujar la intro
+    //Dibujar la intro
     void draw(RenderWindow& window);
-
-    // Verificar si la intro terminó
+    //Verificar si la intro termino
     bool isFinished() const;
-
-    // Permitir saltar la intro
+    //Permitir saltar la intro
     void handleEvent(const Event& ev);
-
-    // Configurar las imágenes de la intro
+    //Configurar las imágenes de la intro
     void addLogo(const string& imagePath, float displayDuration, const Color& bgColor = Color::Black);
 
 private:
@@ -35,7 +31,6 @@ private:
         FADE_OUT,
         FINISHED
     };
-
     struct LogoSlide {
         string imagePath;
         float displayDuration;

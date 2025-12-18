@@ -4,7 +4,6 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <memory>
-
 using namespace std;
 using namespace sf;
 
@@ -12,24 +11,18 @@ class VoiceBlip {
 public:
     VoiceBlip();
     ~VoiceBlip();
-
-    // Carga un archivo .wav/.ogg. Devuelve true si se cargó correctamente.
+    //Carga un archivo .wav/.ogg.
     bool loadFromFile(const string& path);
-
-    // Reproduce el blip en bucle (setLoop(true)). No relanza si ya está sonando.
+    //Reproduce el blip en bucle
     void playLoop();
-
-    // Detiene la reproducción (y resetea a offset 0).
+    //Detiene la reproduccion
     void stop();
-
-    // Ajusta el volumen (0..100)
+    //Ajusta el volumen
     void setVolume(float vol);
-
-    // ¿Está sonando actualmente?
+    //Esta sonando actualmente?
     bool isPlaying() const;
-
 private:
-    // Usamos unique_ptr para gestionar el buffer en heap (evita copias)
+    //Usamos unique_ptr para gestionar el buffer en heap
     unique_ptr<SoundBuffer> buffer;
     Sound sound;
 };

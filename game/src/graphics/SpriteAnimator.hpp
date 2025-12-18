@@ -10,7 +10,6 @@ private:
     const Texture* texA;
     const Texture* texB;
     Sprite* sprite;
-
     float frameDuration;
     float timer;
     bool usingA;
@@ -20,13 +19,11 @@ public:
     SpriteAnimator();
 
     void attachSprite(Sprite* s);
-    // recibe punteros a Textures (puedes pasar &resources.getTexture(path))
     void loadFrames(const Texture* a, const Texture* b);
     void setFPS(int fps);
 
     void play();
     void stop();
-
     void update(float dt);
 };
 

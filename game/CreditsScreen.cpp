@@ -4,21 +4,17 @@
 CreditsScreen::CreditsScreen(ResourceManager& res, Vector2u winSize) {
     background.setSize(Vector2f(winSize));
     background.setFillColor(Color(34, 3, 12));
-
+	//Carga titulo
     font = &res.getFont("assets/fonts/default.ttf");
     titleFont = &res.getFont("assets/fonts/title.ttf");
-
 	title.setFont(*titleFont);
 	title.setString("CREDITOS");
 	title.setCharacterSize(120);
 	title.setFillColor(Color(252, 244, 228));
 	FloatRect bounds = title.getLocalBounds();
-	title.setOrigin(
-	    bounds.left + bounds.width / 2.f,
-	    bounds.top  + bounds.height / 2.f
-	);
+	title.setOrigin(bounds.left + bounds.width / 2.f,bounds.top  + bounds.height / 2.f);
 	title.setPosition(winSize.x / 2.f, 120.f);
-
+	//String mostrado
     vector<string> content = {
         "Visualnovel desarrollado por:",
         "KitllyCat",
@@ -43,9 +39,8 @@ CreditsScreen::CreditsScreen(ResourceManager& res, Vector2u winSize) {
         y += 48;
         lines.push_back(t);
     }
-
     hint.setFont(*font);
-    hint.setString("Presiona cualquier tecla o click para volver atras...");
+    hint.setString("Presiona cualquier tecla o click para volver");
     hint.setCharacterSize(24);
     hint.setFillColor(Color(150, 150, 150));
     hint.setPosition(winSize.x - 500, winSize.y - 60);
