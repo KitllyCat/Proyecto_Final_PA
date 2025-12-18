@@ -1,7 +1,7 @@
 # Proyecto: *Remoria~*  
 **Visual Novel creada en C++ con SFML**
 
-Este repositorio contiene el desarrollo de una novela visual centrada en una atmósfera nostálgica y melancólica. El proyecto busca recrear la sensación de un recuerdo fragmentado, usando gráficos simples, animaciones mínimas y una paleta suave inspirada en ilustraciones sobre papel.
+Este repositorio contiene el desarrollo de una novela visual centrada en una atmósfera nostálgica y retro. El proyecto busca recrear la sensación de un recuerdo fragmentado, usando gráficos simples, animaciones mínimas y una paleta suave inspirada en ilustraciones sobre papel...
 
 *Remoria* sigue la historia de Kami que intenta reconstruir momentos importantes de su infancia. A través de sus recuerdos, elecciones y pequeñas interacciones, el jugador explora memorias que mezclan ternura, confusión y ciertos matices emocionales más profundos. La experiencia está diseñada para sentirse como mirar un álbum de recuerdos, donde cada imagen parece desvanecerse lentamente con el tiempo.
 
@@ -35,7 +35,7 @@ Este proyecto se desarrolla con:
 │   │   ├── backgrounds/
 │   │   ├── ui/
 │   │   ├── intro/
-│   │   └── icon.png (o .ico)
+│   │   └── icon.png (e .ico)
 ├── data/
 │   ├── game_config.json
 │   ├── scenes/
@@ -46,6 +46,16 @@ Este proyecto se desarrolla con:
 │   ├── core/
 │   │   ├── ResourceManager.h
 │   │   └── ResourceManager.cpp
+│   ├── graphics/
+│   │   ├── SpriteAnimator.h
+│   │   ├── SpriteAnimator.cpp
+│   │   ├── TransitionEffects.h
+│   │   └── TransitionEffects.cpp
+│   ├── icon/
+│   │   └── icon.rc
+│   ├── save/
+│   │   ├── SaveManager.h
+│   │   └── SaveManager.cpp
 │   ├── visualnovel/
 │   │   ├── DialogueBox.h
 │   │   ├── DialogueBox.cpp
@@ -55,16 +65,8 @@ Este proyecto se desarrolla con:
 │   │   ├── SceneManager.cpp
 │   │   ├── VoiceBlip.h
 │   │   └── VoiceBlip.cpp
-│   ├── graphics/
-│   │   ├── SpriteAnimator.h
-│   │   ├── SpriteAnimator.cpp
-│   │   ├── TransitionEffects.h
-│   │   └── TransitionEffects.cpp
-│   ├── save/
-│   │   ├── SaveManager.h
-│   │   └── SaveManager.cpp
-│   └──
-├── game.exe
+│   └── json.hpp
+├── Remoria.exe
 ├── main.cpp
 ├── MainMenu.h
 ├── MainMenu.cpp
@@ -72,7 +74,7 @@ Este proyecto se desarrolla con:
 ├── CreditsScreen.cpp
 ├── IntroScreen.h
 ├── IntroScreen.cpp
-└── README.txt
+└── README.md
 ```
 
 ## Builds
@@ -106,11 +108,12 @@ Bug critico con los creditos y un bucle infinito de loop solucionado. Se añadio
 
 Se mejoro ligeramente el codigo, se añadio un goto de scenas sin la necesidad de choise, y un sistema para oculpar al personaje si es que se desea, una leve mejora a la version anterior y quizas la que se empiece a trabajar en el juego.
 
+-**Beta         v0.6.9+:**
+
+Implementado el sistema de ecalar a ventana en caso que la resolución sea menor, pero afecta a los botones del juego y a los efectos. Y es jugable a modo de historia, Capitulo 1 y 2 añadidos.
+
 ***(Siendo esta la ultima actualizacion disponible...)***
-
--**Beta     v0.7:**
-
-*En desarrollo... (18/12/2025)*
+*En desarrollo... (Fecha de publicación: 18/12/2025 a las 20:00)*
 
 ## Compilacion del juego
 
