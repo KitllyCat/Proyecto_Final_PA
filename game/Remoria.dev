@@ -6,7 +6,7 @@ Ver=2
 ObjFiles=
 Includes=
 Libs=
-PrivateResource=
+PrivateResource=Remoria_private.rc
 ResourceIncludes=
 MakeIncludes=
 Compiler=
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;8;0;0;0
-UnitCount=23
+UnitCount=24
 
 [VersionInfo]
 Major=1
@@ -276,6 +276,15 @@ CompileCpp=1
 Folder=
 Compile=1
 Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit24]
+FileName=src\icon\icon.rc
+Folder=Resources
+Compile=1
+Link=0
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
