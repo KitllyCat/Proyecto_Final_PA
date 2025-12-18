@@ -1,4 +1,4 @@
-// main.cpp - Remoria v0.6.8
+// main.cpp - Remoria v0.6.9+
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
@@ -180,4 +180,4 @@ int main() {
     }
     return 0;
 }
-//end main.cpp - Remoria v0.6.8
+//end main.cpp - Remoria v0.6.9+
