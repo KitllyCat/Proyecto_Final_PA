@@ -113,7 +113,9 @@ Se mejoro ligeramente el codigo, se añadio un goto de scenas sin la necesidad d
 Implementado el sistema de ecalar a ventana en caso que la resolución sea menor, pero afecta a los botones del juego y a los efectos. Y es jugable a modo de historia, Capitulo 1 y 2 añadidos.
 
 - **Beta         v.0.7:**
-En desarrollo...
+
+**Esta actualizacion esta siendo trabajada en un repositorio diferente, puedes consultarla aqui...***
+https://github.com/KitllyCat/Remoria
 
 ***(Siendo esta la ultima actualizacion disponible...)***
 
